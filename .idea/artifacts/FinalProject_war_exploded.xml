@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="FinalProject:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/FinalProject_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="FinalProject/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="FinalProject" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="application" name="log4j-api-2.11.0-javadoc" />
+          <element id="library" level="application" name="log4j-core-2.11.0-javadoc" />
+          <element id="library" level="application" name="mysql-connector-java-8.0.15" />
+          <element id="library" level="application" name="javax.mail" />
+          <element id="library" level="application" name="javax.servlet.jsp.jstl-1.2.1" />
+          <element id="library" level="application" name="javax.servlet.jsp.jstl-api-1.2.1" />
+          <element id="library" level="application" name="jquery-2.1.4" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
