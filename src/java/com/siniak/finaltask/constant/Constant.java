@@ -34,6 +34,7 @@ public class Constant {
     public static final String SEARCH_NAME_ATTR = "searchName";
     public static final String HELP_RESPONSE_ATTR = "helpresponse";
     public static final String LIST_FIND_ATTR = "findlist";
+    public static final String ERROR_MESSAGE_ATTR = "errorMessage";
     public static final String HELP_RESPONSES_ATTR = "responses";
     public static final String CREATE_USER_ERROR_MSG = MessageManager.getProperty("create.user.error");
     public static final String FIND_USER_ERROR_MSG = MessageManager.getProperty("find.user.error");
@@ -46,6 +47,7 @@ public class Constant {
     public static final String VOLUNTEERS_PAGE = ConfigurationManager.getProperty("path.page.volunteers");
     public static final String ERROR_PAGE = ConfigurationManager.getProperty("path.page.error");
     public static final String EDIT_PERSON_PAGE = ConfigurationManager.getProperty("path.page.edit_person");
+    public static final String EDIT_VOLUNTEER_PAGE = ConfigurationManager.getProperty("path.page.edit_volunteer");
     public static final String DATABASE_PATH = "database";
 
     private Constant() {

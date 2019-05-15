@@ -1,6 +1,9 @@
 package com.siniak.finaltask.connection;
 
 import com.siniak.finaltask.exception.ConnectionPoolException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.sql.Connection;
@@ -30,6 +33,8 @@ public class ConnectionPool {
     private static AtomicBoolean instanceCreated = new AtomicBoolean(false);
     private static Lock singletonLock = new ReentrantLock();
 
+    static final Logger logger = LogManager.getLogger();
+
     private ConnectionPool(){
     }
 
@@ -43,6 +48,7 @@ public class ConnectionPool {
                     instanceCreated.set(true);
                 }
             } catch (ConnectionPoolException e) {
+                logger.log(Level.FATAL, e);
                 throw new RuntimeException("Can't initialize connection pool", e); // todo log
             } finally {
                 singletonLock.unlock();

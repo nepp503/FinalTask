@@ -20,6 +20,7 @@ public class CreateHelpResponseCommand implements Command {
             service.create(createHelpResponse(content));
             router.setPage(VOLUNTEER_PAGE);
         }  catch (DaoException e) {
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             logger.log(Level.ERROR, e);
             router.setPage(ERROR_PAGE);
         }

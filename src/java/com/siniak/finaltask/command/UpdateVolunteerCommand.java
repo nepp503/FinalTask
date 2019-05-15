@@ -28,7 +28,7 @@ public class UpdateVolunteerCommand implements Command {
         Volunteer volunteer = new Volunteer();
         volunteer.setFirstName(content.getParameter(FIRSTNAME_PARAMETR));
         volunteer.setLastName(content.getParameter(LASTNAME_PARAMETR));
-        volunteer.setPhoto(content.getParameter(PHOTO_PARAMETR));
+//        volunteer.setPhoto(content.getParameter(PHOTO_PARAMETR));
         volunteer.setYearsOfWork(Integer.parseInt(content.getParameter(YEARS_OF_WORK_PARAMETR)));
         volunteer.setNumberOfOperations(Integer.parseInt(content.getParameter(NUMBER_OF_OPERATIONS_PARAMETR)));
         return volunteer;

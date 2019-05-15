@@ -70,12 +70,11 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(INSERT_VOLUNTEER);
-            statement.setInt(1, volunteer.getId());
-            statement.setString(2, volunteer.getFirstName());
-            statement.setString(3, volunteer.getLastName());
-            statement.setString(4, volunteer.getPhoto());
-            statement.setInt(5, volunteer.getYearsOfWork());
-            statement.setInt(6, volunteer.getNumberOfOperations());
+            statement.setString(1, volunteer.getFirstName());
+            statement.setString(2, volunteer.getLastName());
+            statement.setString(3, volunteer.getPhoto());
+            statement.setInt(4, volunteer.getYearsOfWork());
+            statement.setInt(5, volunteer.getNumberOfOperations());
             statement.executeUpdate();
         } catch (SQLException ex) {
             throw new DaoException(CREATE_USER_ERROR_MSG, ex);
@@ -99,6 +98,7 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
             statement.executeUpdate();
             return volunteer;
         } catch (SQLException e) {
+            System.out.println(e);
             throw new DaoException(e);
         }
     }

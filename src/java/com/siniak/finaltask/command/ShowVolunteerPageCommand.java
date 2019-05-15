@@ -21,6 +21,7 @@ public class ShowVolunteerPageCommand implements Command {
             content.setRequestAttribute(VOLUNTEER_ATTR, volunteer);
             router.setPage(VOLUNTEER_PAGE);
         } catch (DaoException e) {
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             logger.log(Level.ERROR, e);
             router.setPage(ERROR_PAGE);
         }

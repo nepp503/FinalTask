@@ -24,7 +24,10 @@ public class SessionRequestContent {
     }
 
     public String getParameter(String parameterName) {
-        return requestParameters.get(parameterName)[0];
+        if (requestParameters.get(parameterName) != null) {
+            return requestParameters.get(parameterName)[0];
+        }
+        return null;
     }
 
     public Object getSessionAttribute(String attribute) {

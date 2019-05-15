@@ -1,24 +1,26 @@
 package com.siniak.finaltask.command;
 
 import com.siniak.finaltask.entity.SearchedPerson;
+import com.siniak.finaltask.entity.Volunteer;
 import com.siniak.finaltask.exception.DaoException;
 import com.siniak.finaltask.service.SearchedPersonService;
+import com.siniak.finaltask.service.VolunteerService;
 import com.siniak.finaltask.utils.SessionRequestContent;
 import org.apache.logging.log4j.Level;
 
-import java.util.List;
-
 import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.constant.Constant.ERROR_PAGE;
 
-public class FindAllSearchedPeople implements Command {
-    @Override
+public class EditVolunteerCommand implements Command {
     public Router execute(SessionRequestContent content) {
-        SearchedPersonService service = new SearchedPersonService();
         Router router = new Router();
+        VolunteerService service = new VolunteerService();
         try {
-            List<SearchedPerson> people = service.findAll();
-            content.setRequestAttribute(LIST_PERSON_ATTR, people);
-            router.setPage(PEOPLE_PAGE);
+            if (content.getParameter(VOLUNTEER_ID_PARAMETR) != null) {
+                Volunteer volunteer = service.findById(Integer.parseInt(content.getParameter(VOLUNTEER_ID_PARAMETR)));
+                content.setRequestAttribute(VOLUNTEER_ATTR, volunteer);
+            }
+            router.setPage(EDIT_VOLUNTEER_PAGE);
         } catch (DaoException e) {
             content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             logger.log(Level.ERROR, e);

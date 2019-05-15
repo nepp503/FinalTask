@@ -7,8 +7,7 @@ public class SearchedPerson extends Entity {
     private String birthPlace;
     private String searchArea;
     private String specialSigns;
-    private String photo; //todo
-    private boolean found;
+    private String photo;
 
     public int getId() {
         return id;
@@ -64,14 +63,6 @@ public class SearchedPerson extends Entity {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public boolean isFound() {
-        return found;
-    }
-
-    public void setFound(boolean found) {
-        this.found = found;
     }
 
     @Override

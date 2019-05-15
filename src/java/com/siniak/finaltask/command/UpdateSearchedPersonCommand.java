@@ -27,14 +27,13 @@ public class UpdateSearchedPersonCommand implements Command {
 
     private SearchedPerson updateSearchedPerson(SessionRequestContent content){
         SearchedPerson person = new SearchedPerson();
-        person.setId(Integer.parseInt(content.getParameter(ID_PARAMETR)));
+        person.setId(Integer.parseInt(content.getParameter(SP_ID_PARAMETR)));
         person.setFirstName(content.getParameter(FIRSTNAME_PARAMETR));
         person.setLastName(content.getParameter(LASTNAME_PARAMETR));
         person.setBirthPlace(content.getParameter(BIRTH_PLACE_PARAMETR));
         person.setSearchArea(content.getParameter(SEARCH_AREA_PARAMETR));
         person.setSpecialSigns(content.getParameter(SPECIAl_SIGNS_PARAMETR));
         person.setPhoto(content.getParameter(PHOTO_PARAMETR));
-//        person.setFound(); //todo
         return person;
     }
 }

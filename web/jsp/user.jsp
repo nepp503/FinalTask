@@ -23,8 +23,8 @@
         <div class="movie">
             <c:set var="admin" value="ADMIN"/>
             <c:if test="${user.userType == admin}">
-                <h3><a href="controller?command=show_edit_searched_person_form"><fmt:message key="add.person"/></a></h3>
-                <h3><a href="controller?command=show_edit_volunteer_form"><fmt:message key="add.volunteer"/></a></h3>
+                <h3><a href="controller?command=edit_person"><fmt:message key="add.person"/></a></h3>
+                <h3><a href="controller?command=edit_volunteer"><fmt:message key="add.volunteer"/></a></h3>
             </c:if>
 
 <%--            <div class="poster">--%>

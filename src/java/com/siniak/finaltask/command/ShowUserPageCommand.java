@@ -25,6 +25,7 @@ public class ShowUserPageCommand implements Command {
             content.setRequestAttribute(HELP_RESPONSES_ATTR, responses);
             router.setPage(USER_PAGE);
         } catch (DaoException e) {
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             logger.log(Level.ERROR, e);
             router.setPage(ERROR_PAGE);
         }

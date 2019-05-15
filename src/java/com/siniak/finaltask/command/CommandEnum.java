@@ -91,6 +91,30 @@ public enum CommandEnum {
         }
     },
 
+    CREATE_VOLUNTEER {
+        {
+            this.command = new CreateVolunteerCommand();
+        }
+    },
+
+    EDIT_VOLUNTEER {
+        {
+            this.command = new EditVolunteerCommand();
+        }
+    },
+
+    UPDATE_VOLUNTEER {
+        {
+            this.command = new UpdateVolunteerCommand();
+        }
+    },
+
+    UPDATE_SEARCHED_PERSON {
+        {
+            this.command = new UpdateSearchedPersonCommand();
+        }
+    },
+
     EMPTY{
         {
             this.command = new EmptyCommand();

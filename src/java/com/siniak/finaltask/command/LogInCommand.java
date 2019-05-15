@@ -21,6 +21,7 @@ public class LogInCommand implements Command {
             content.setSessionAttribute(USER_ATTR, user);
             router.setRedirect();
         } catch (DaoException e) {
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             logger.log(Level.ERROR, e);
             router.setPage(ERROR_PAGE);
         }

@@ -16,6 +16,7 @@ public class DeleteHelpResponseCommand implements Command {
             service.deleteById(Integer.parseInt(content.getParameter(RESPONSE_ID_PARAMETR)));
             router.setPage(SEARCHED_PERSON_PAGE);
         } catch (DaoException e) {
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             logger.log(Level.ERROR, e);
             router.setPage(ERROR_PAGE);
         }

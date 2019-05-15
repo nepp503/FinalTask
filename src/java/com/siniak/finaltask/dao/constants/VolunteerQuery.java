@@ -2,7 +2,7 @@ package com.siniak.finaltask.dao.constants;
 
 public class VolunteerQuery {
     public final static String INSERT_VOLUNTEER = "INSERT volunteers" +
-            "(id, firstname, lastname, photo, yearsofwork, numberofoperations) " +
+            "(firstname, lastname, photo, yearsofwork, numberofoperations) " +
             "VALUES(?,?,?,?,?)";
     public final static String FIND_VOLUNTEER_BY_ID = "SELECT id, firstname, lastname, " +
             "photo, yearsofwork, numberofoperations " +

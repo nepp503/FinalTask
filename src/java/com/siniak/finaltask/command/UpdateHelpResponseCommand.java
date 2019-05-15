@@ -17,6 +17,7 @@ public class UpdateHelpResponseCommand implements Command{
             service.update(updateHelpResponse(content));
             router.setPage(VOLUNTEER_PAGE);
         }  catch (DaoException e) {
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             logger.log(Level.ERROR, e);
             router.setPage(ERROR_PAGE);
         }

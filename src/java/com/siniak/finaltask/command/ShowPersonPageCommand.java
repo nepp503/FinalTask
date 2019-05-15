@@ -25,6 +25,7 @@ public class ShowPersonPageCommand implements Command {
             content.setRequestAttribute(HELP_RESPONSES_ATTR, responses);
             router.setPage(SEARCHED_PERSON_PAGE);
         } catch (DaoException e) {
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             logger.log(Level.ERROR, e);
             router.setPage(ERROR_PAGE);
         }

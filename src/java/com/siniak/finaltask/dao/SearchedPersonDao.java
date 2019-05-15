@@ -72,15 +72,15 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(INSERT_SEARCHED_PERSON);
-            statement.setInt(1, searchedPerson.getId());
-            statement.setString(2, searchedPerson.getFirstName());
-            statement.setString(3, searchedPerson.getLastName());
-            statement.setString(4, searchedPerson.getBirthPlace());
-            statement.setString(5, searchedPerson.getSearchArea());
-            statement.setString(6, searchedPerson.getSpecialSigns());
-            statement.setString(7, searchedPerson.getPhoto());
+            statement.setString(1, searchedPerson.getFirstName());
+            statement.setString(2, searchedPerson.getLastName());
+            statement.setString(3, searchedPerson.getBirthPlace());
+            statement.setString(4, searchedPerson.getSearchArea());
+            statement.setString(5, searchedPerson.getSpecialSigns());
+            statement.setString(6, searchedPerson.getPhoto());
             statement.executeUpdate();
         } catch (SQLException ex) {
+            System.out.println(ex);
             throw new DaoException(CREATE_USER_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
