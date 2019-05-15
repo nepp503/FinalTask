@@ -20,8 +20,9 @@ public class ShowUserPageCommand implements Command {
         HelpResponseService helpResponseService = new HelpResponseService();
         try {
             User user = service.findUserById(Integer.parseInt(content.getParameter(USER_ID_PARAMETR)));
-//            List<HelpResponse> responses = helpResponseService.findByPersonId() //todo
+            List<HelpResponse> responses = helpResponseService.findByUserId(user.getId());
             content.setRequestAttribute(USER_ATTR, user);
+            content.setRequestAttribute(HELP_RESPONSES_ATTR, responses);
             router.setPage(USER_PAGE);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);

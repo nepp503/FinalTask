@@ -1,14 +1,13 @@
 package com.siniak.finaltask.utils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SessionRequestContent {
     private Map<String, Object> requestAttributes = new HashMap<>();
     private Map<String, String[]> requestParameters = new HashMap<>();
     private Map<String, Object> sessionAttributes = new HashMap<>();
+    private List<String> deletedSessionAttributes = new ArrayList<>();
 
     public SessionRequestContent() {
     }
@@ -49,7 +48,7 @@ public class SessionRequestContent {
     }
 
     public void removeSessionAttribute(String attribute) {
-        sessionAttributes.remove(attribute);
+        deletedSessionAttributes.add(attribute);
     }
 
     private void extractRequestAttributes(HttpServletRequest request) {
@@ -85,6 +84,12 @@ public class SessionRequestContent {
         }
         for (Map.Entry<String, Object> sessionAttribute : sessionAttributes.entrySet()) {
             request.getSession().setAttribute(sessionAttribute.getKey(), sessionAttribute.getValue());
+        }
+        if(!deletedSessionAttributes.isEmpty()){
+            for (String attribute : deletedSessionAttributes) {
+                request.getSession().removeAttribute(attribute);
+            }
+            deletedSessionAttributes.clear();
         }
     }
 }

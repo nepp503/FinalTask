@@ -123,6 +123,25 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
         return responses;
     }
 
+    public List<HelpResponse> findByUserId(int userId) throws DaoException {
+        List<HelpResponse> responses = new ArrayList<>();
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(FIND_HELP_RESPONSE_BY_USER_ID);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                responses.add(defineHelpResponse(resultSet));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            throw new DaoException("SQL request failed", ex);
+        } finally {
+            closeStatement(statement);
+        }
+        return responses;
+    }
+
     private HelpResponse defineHelpResponse(ResultSet resultSet) throws SQLException {
         HelpResponse response = new HelpResponse();
         response.setId(resultSet.getInt(ID_PARAMETR));

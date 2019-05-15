@@ -13,7 +13,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <footer>
     <div class="footer-div">
-        <p class="footer-p">Thank you for visiting us &hearts;</p>
+        <p class="footer-p"><fmt:message key="footer"/></p>
     </div>
 </footer>
 </body>

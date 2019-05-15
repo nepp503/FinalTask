@@ -60,47 +60,53 @@
                 <c:set var="helpResponses" value="${requestScope.responses}"/>
                 <p><strong><fmt:message key="responses"/> : </strong></p>
                 <c:forEach var="response" items="${helpResponses}">
-                    <div class="review">
-                        <h4><a href="controller?command=show_user_page&userid=${response.userId}"><c:out
-                                value="${response.userLogin}"/></a></h4>
+                    <c:choose>
+                        <c:when test="${user.id == response.userId}">
+                            <div class="review">
+                                <h4><a href="controller?command=show_user_page&userid=${response.userId}"><c:out
+                                        value="${response.userLogin}"/></a></h4>
 
-                        <div class="btn-row">
-                            <c:if test="${user.id == response.userId}">
+                                <div class="btn-row">
+                                    <div class="btn">
+                                        <button class="edit-btn" id="${response.id}"><i class="fa fa-pencil-square-o"
+                                                                                        aria-hidden="true"></i></button>
+                                    </div>
 
-                                <div class="btn">
-                                    <button class="edit-btn" id="${response.id}"><i class="fa fa-pencil-square-o"
-                                                                                  aria-hidden="true"></i></button>
+                                    <form action="controller" method="post" class="delete-review-form">
+                                        <input type="hidden" name="command" value="delete_help_response"/>
+                                        <input type="hidden" name="responseid" value="${response.id}"/>
+                                        <div class="btn">
+                                            <button class="delete-btn"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <form action="controller" method="post" id="edit-review-form-${response.id}">
+                                        <input type="hidden" name="responseid" value="${response.id}"/>
+                                        <input type="hidden" name="command" value="update_help_response"/>
+                                        <input type="hidden" name="review"/>
+
+                                        <div class="btn">
+                                            <button class="save-btn" name="save-btn" id="save-${response.id}"><i
+                                                    class="icon-save"></i>
+                                            </button>
+                                        </div>
+
+                                    </form>
+                                    <c:set var="addedResponse" value="true"/>
                                 </div>
-
-                                <form action="controller" method="post" class="delete-review-form">
-                                    <input type="hidden" name="command" value="delete_help_response"/>
-                                    <input type="hidden" name="responseid" value="${response.id}"/>
-                                    <div class="btn">
-                                        <button class="delete-btn"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                </form>
-
-                                <form action="controller" method="post" id="edit-review-form-${response.id}">
-                                    <input type="hidden" name="responseid" value="${response.id}"/>
-                                    <input type="hidden" name="command" value="update_help_response"/>
-                                    <input type="hidden" name="review"/>
-
-                                    <div class="btn">
-                                        <button class="save-btn" name="save-btn" id="save-${response.id}"><i
-                                                class="icon-save"></i>
-                                        </button>
-                                    </div>
-
-                                </form>
-                                <c:set var="addedResponse" value="true"/>
-                            </c:if>
-                        </div>
-
-                        <h3 id="title-${response.id}" class="review-title"><c:out value="${response.title}"/></h3>
-                        <p id="body-${response.id}" class="review-body"><c:out value="${response.body}"/></p>
-
-                    </div>
+                                <h3 id="title-${response.id}" class="review-title"><c:out value="${response.title}"/></h3>
+                                <p id="body-${response.id}" class="review-body"><c:out value="${response.body}"/></p>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="review">
+                                <h4><c:out value="${response.userLogin}"/></h4>
+                                <h3 id="title-${response.id}" class="review-title"><c:out value="${response.title}"/></h3>
+                                <p id="body-${response.id}" class="review-body"><c:out value="${response.body}"/></p>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </c:forEach>
             </c:if>
 

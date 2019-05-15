@@ -16,6 +16,9 @@ public class HelpResponseQuery {
             "id, userid, personid, title, body, userlogin " +
             "FROM helpresponse";
     public final static String FIND_HELP_RESPONSE_BY_PERSON_ID = "SELECT id, userid, personid, title, body, userlogin " +
-            "FROM finaltask.helpresponse " +
+            "FROM helpresponse " +
             "WHERE personid=?";
+    public final static String FIND_HELP_RESPONSE_BY_USER_ID = "SELECT id, userid, personid, title, body, userlogin " +
+            "FROM helpresponse " +
+            "WHERE userid=?";
 }

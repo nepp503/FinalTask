@@ -35,4 +35,9 @@ public class HelpResponseService extends AbstractService{
         HelpResponseDao dao = manager.getHelpResponseDao();
         return dao.findByPersonId(personId);
     }
+
+    public List<HelpResponse> findByUserId(int userId) throws DaoException {
+        HelpResponseDao dao = manager.getHelpResponseDao();
+        return dao.findByUserId(userId);
+    }
 }
