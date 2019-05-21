@@ -38,6 +38,19 @@ public class Constant {
     public static final String HELP_RESPONSES_ATTR = "responses";
     public static final String CREATE_USER_ERROR_MSG = MessageManager.getProperty("create.user.error");
     public static final String FIND_USER_ERROR_MSG = MessageManager.getProperty("find.user.error");
+    public static final String UPDATE_USER_ERROR_MSG = MessageManager.getProperty("update.user.error");
+    public static final String CREATE_VOLUNTEER_ERROR_MSG = MessageManager.getProperty("create.volunteer.error");
+    public static final String FIND_VOLUNTEER_ERROR_MSG = MessageManager.getProperty("find.volunteer.error");
+    public static final String UPDATE_VOLUNTEER_ERROR_MSG = MessageManager.getProperty("update.volunteer.error");
+    public static final String DELETE_VOLUNTEER_ERROR_MSG = MessageManager.getProperty("delete.volunteer.error");
+    public static final String CREATE_PERSON_ERROR_MSG = MessageManager.getProperty("create.person.error");
+    public static final String FIND_PERSON_ERROR_MSG = MessageManager.getProperty("find.person.error");
+    public static final String UPDATE_PERSON_ERROR_MSG = MessageManager.getProperty("update.person.error");
+    public static final String DELETE_PERSON_ERROR_MSG = MessageManager.getProperty("delete.person.error");
+    public static final String CREATE_RESPONSE_ERROR_MSG = MessageManager.getProperty("create.response.error");
+    public static final String FIND_RESPONSE_ERROR_MSG = MessageManager.getProperty("find.response.error");
+    public static final String UPDATE_RESPONSE_ERROR_MSG = MessageManager.getProperty("update.response.error");
+    public static final String DELETE_RESPONSE_ERROR_MSG = MessageManager.getProperty("delete.response.error");
     public static final String INDEX_PAGE = ConfigurationManager.getProperty("path.page.index");
     public static final String USER_PAGE = ConfigurationManager.getProperty("path.page.user");
     public static final String SEARCHED_PERSON_PAGE = ConfigurationManager.getProperty("path.page.searchedperson");
@@ -48,6 +61,7 @@ public class Constant {
     public static final String ERROR_PAGE = ConfigurationManager.getProperty("path.page.error");
     public static final String EDIT_PERSON_PAGE = ConfigurationManager.getProperty("path.page.edit_person");
     public static final String EDIT_VOLUNTEER_PAGE = ConfigurationManager.getProperty("path.page.edit_volunteer");
+    public static final String EDIT_USER_PAGE = ConfigurationManager.getProperty("path.page.edit_user");
     public static final String DATABASE_PATH = "database";
 
     private Constant() {

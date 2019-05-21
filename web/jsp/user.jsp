@@ -26,7 +26,8 @@
                 <h3><a href="controller?command=edit_person"><fmt:message key="add.person"/></a></h3>
                 <h3><a href="controller?command=edit_volunteer"><fmt:message key="add.volunteer"/></a></h3>
             </c:if>
-
+            <button class="edit-by-admin-btn"><a href="controller?command=edit_user&userid=${user.id}">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
 <%--            <div class="poster">--%>
 <%--                <a href="#">--%>
 <%--                    <img src="${pageContext.request.contextPath}/${searchedperson.photo}"--%>
@@ -58,8 +59,6 @@
                     </div>
                 </c:forEach>
             </c:if>
-
-        <a href="${requestScope.previous_page}"><fmt:message key="back"/></a>
     </section>
 </section>
 <c:import url="footer.jsp"/>

@@ -1,7 +1,5 @@
 package com.siniak.finaltask.command;
 
-import com.siniak.finaltask.entity.HelpResponse;
-import com.siniak.finaltask.entity.SearchedPerson;
 import com.siniak.finaltask.exception.DaoException;
 import com.siniak.finaltask.exception.ServiceException;
 import com.siniak.finaltask.service.HelpResponseService;
@@ -9,22 +7,16 @@ import com.siniak.finaltask.service.SearchedPersonService;
 import com.siniak.finaltask.utils.SessionRequestContent;
 import org.apache.logging.log4j.Level;
 
-import java.util.List;
-
 import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.constant.Constant.ERROR_PAGE;
 
-public class ShowPersonPageCommand implements Command {
+public class DeleteSearchedPersonCommand implements Command {
     @Override
     public Router execute(SessionRequestContent content) {
-        Router router = new Router();
         SearchedPersonService service = new SearchedPersonService();
-        HelpResponseService helpResponseService = new HelpResponseService();
+        Router router = new Router();
         try {
-            SearchedPerson person = service.findById(Integer.parseInt(content.getParameter(SP_ID_PARAMETR)));
-            List<HelpResponse> responses = helpResponseService.findByPersonId(person.getId());
-            content.setRequestAttribute(SEARCHED_PERSON_ATTR, person);
-            content.setRequestAttribute(HELP_RESPONSES_ATTR, responses);
-            router.setPage(SEARCHED_PERSON_PAGE);
+            service.deleteById(Integer.parseInt(content.getParameter(SP_ID_PARAMETR)));
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);

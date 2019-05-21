@@ -27,6 +27,10 @@
                         href="controller?command=edit_volunteer&volunteerid=${volunteer.id}"><i
                         class="fa fa-pencil-square-o"
                         aria-hidden="true"></i></a></button>
+                <button class="delete-person-btn">
+                    <a href="controller?command=delete_volunteer&personid=${volunteer.id}">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </button>
             </c:if>
         </h2>
     </div>
@@ -49,7 +53,6 @@
             </c:if>
 
         </div>
-        <a href="${requestScope.previous_page}"><fmt:message key="back"/></a>
     </section>
 </section>
 <c:import url="footer.jsp"/>

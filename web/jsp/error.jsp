@@ -24,7 +24,6 @@
             ${requestScope.errorMessage}<br/>
         </div>
         <a href="${pageContext.request.contextPath}/index.jsp"><fmt:message key="index.page"/></a><br/>
-        <a href="${requestScope.previous_page}"><fmt:message key="back"/></a>
     </section>
 </section>
 <c:import url="footer.jsp"/>

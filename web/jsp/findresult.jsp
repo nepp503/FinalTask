@@ -46,7 +46,6 @@
                 </li>
             </ul>
         </c:forEach>
-        <a href="${requestScope.previous_page}"><fmt:message key="back"/></a>
     </section>
 </section>
 <c:import url="footer.jsp"/>

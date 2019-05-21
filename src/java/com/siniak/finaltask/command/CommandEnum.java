@@ -115,6 +115,30 @@ public enum CommandEnum {
         }
     },
 
+    EDIT_USER{
+        {
+            this.command = new EditUserCommand();
+        }
+    },
+
+    UPDATE_USER{
+        {
+            this.command = new UpdateUserCommand();
+        }
+    },
+
+    DELETE_PERSON{
+        {
+            this.command = new DeleteSearchedPersonCommand();
+        }
+    },
+
+    DELETE_VOLUNTEER{
+        {
+            this.command = new DeleteVolunteerCommand();
+        }
+    },
+
     EMPTY{
         {
             this.command = new EmptyCommand();

@@ -2,6 +2,7 @@ package com.siniak.finaltask.command;
 
 import com.siniak.finaltask.entity.SearchedPerson;
 import com.siniak.finaltask.exception.DaoException;
+import com.siniak.finaltask.exception.ServiceException;
 import com.siniak.finaltask.service.SearchedPersonService;
 import com.siniak.finaltask.utils.SessionRequestContent;
 import org.apache.logging.log4j.Level;
@@ -19,9 +20,9 @@ public class FindAllSearchedPeople implements Command {
             List<SearchedPerson> people = service.findAll();
             content.setRequestAttribute(LIST_PERSON_ATTR, people);
             router.setPage(PEOPLE_PAGE);
-        } catch (DaoException e) {
-            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
+        } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             router.setPage(ERROR_PAGE);
         }
         return router;

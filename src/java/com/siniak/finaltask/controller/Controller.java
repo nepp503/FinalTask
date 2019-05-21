@@ -3,6 +3,7 @@ package com.siniak.finaltask.controller;
 import com.siniak.finaltask.command.Command;
 import com.siniak.finaltask.command.CommandFactory;
 import com.siniak.finaltask.command.Router;
+import com.siniak.finaltask.connection.ConnectionPool;
 import com.siniak.finaltask.utils.SessionRequestContent;
 
 import javax.servlet.ServletException;
@@ -17,13 +18,20 @@ import static com.siniak.finaltask.constant.Constant.USER_ATTR;
 
 @WebServlet(name = "Controller", urlPatterns = {"/controller"})
 public class Controller extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
+
+//    @Override
+//    public void destroy() {
+//        ConnectionPool.getInstance().shutdownPool();
+//    }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Router router = null;

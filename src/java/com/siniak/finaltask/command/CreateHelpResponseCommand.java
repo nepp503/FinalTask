@@ -1,12 +1,11 @@
 package com.siniak.finaltask.command;
 
 import com.siniak.finaltask.entity.HelpResponse;
-import com.siniak.finaltask.entity.Volunteer;
 import com.siniak.finaltask.exception.DaoException;
+import com.siniak.finaltask.exception.ServiceException;
 import com.siniak.finaltask.service.HelpResponseService;
-import com.siniak.finaltask.service.VolunteerService;
 import com.siniak.finaltask.utils.SessionRequestContent;
-import com.sun.xml.internal.ws.api.message.HeaderList;
+
 import org.apache.logging.log4j.Level;
 
 import static com.siniak.finaltask.constant.Constant.*;
@@ -18,10 +17,10 @@ public class CreateHelpResponseCommand implements Command {
         Router router = new Router();
         try {
             service.create(createHelpResponse(content));
-            router.setPage(VOLUNTEER_PAGE);
-        }  catch (DaoException e) {
-            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
+            router.setPage(SEARCHED_PERSON_PAGE);
+        }  catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             router.setPage(ERROR_PAGE);
         }
         return router;

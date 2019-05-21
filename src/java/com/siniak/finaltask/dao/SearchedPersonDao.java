@@ -27,7 +27,7 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
                 people.add(defineSearchedPerson(resultSet));
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
+            System.out.println(ex);// todo
             throw new DaoException("SQL failed", ex);
         } finally {
             closeStatement(statement);

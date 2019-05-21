@@ -85,7 +85,6 @@
 
         <input type="submit" value="<fmt:message key="signup.btn"/>">
     </form>
-    <a href="${requestScope.previous_page}"><fmt:message key="back"/></a>
 </div>
 <c:import url="footer.jsp"/>
 </body>

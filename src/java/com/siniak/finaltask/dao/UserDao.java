@@ -1,7 +1,7 @@
 package com.siniak.finaltask.dao;
 
 import com.siniak.finaltask.entity.User;
-import com.siniak.finaltask.entity.type.UserType;
+import com.siniak.finaltask.entity.UserType;
 import com.siniak.finaltask.exception.DaoException;
 
 import java.sql.*;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.dao.constants.SearchedPersonQuery.UPDATE_SEARCHED_PERSON;
 import static com.siniak.finaltask.dao.constants.UserQuery.*;
 
 public class UserDao extends AbstractDao<User> {
@@ -58,15 +59,11 @@ public class UserDao extends AbstractDao<User> {
 
     @Override
     public boolean deleteById(int id) throws DaoException {
-        return false;
-    }
-
-    public boolean deleteByLogin(String login) throws DaoException {
         boolean result = false;
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(DELETE_USER);
-            statement.setString(1, login);
+            statement.setInt(1, id);
             statement.executeUpdate();
             result = true;
         } catch (SQLException ex) {
@@ -98,24 +95,20 @@ public class UserDao extends AbstractDao<User> {
     }
 
     @Override
-    public User update(User user) {
-        return null;
-    }
-
-    public User findUserByLogin(String login) throws DaoException {
-        User user = new User();
-        PreparedStatement statement = null;
+    public User update(User user) throws DaoException {
+        PreparedStatement preparedStatement = null;
         try {
-            statement = connection.prepareStatement(FIND_USER_BY_LOGIN);
-            statement.setString(1, login);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                defineUser(resultSet, user);
-            }
-        } catch (SQLException ex) {
-            throw new DaoException(FIND_USER_ERROR_MSG, ex);
+            preparedStatement = connection.prepareStatement(UPDATE_USER);
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getFirstName());
+            preparedStatement.setString(3, user.getLastName());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setInt(5, user.getId());
+            preparedStatement.executeUpdate();
+            return user;
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
-        return user;
     }
 
     public User findByLoginAndPassword(String login, String password) throws DaoException {

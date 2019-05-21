@@ -1,7 +1,5 @@
 package com.siniak.finaltask.entity;
 
-import com.siniak.finaltask.entity.type.UserType;
-
 public class User extends Entity{
     private int id;
     private String login;

@@ -1,9 +1,9 @@
 package com.siniak.finaltask.service;
 
-import com.siniak.finaltask.dao.DaoManager;
+import com.siniak.finaltask.dao.DaoBuilder;
 
 public abstract class AbstractService {
-    protected DaoManager manager = new DaoManager();
+    protected DaoBuilder manager = new DaoBuilder();
 
     public AbstractService() {
     }

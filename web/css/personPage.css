@@ -54,6 +54,13 @@ label {
     border-radius: 5px;
 }
 
+.delete-person-btn{
+    background-color: #111;
+    color: white;
+    font-size: 42px;
+    border-radius: 5px;
+}
+
 .save-btn {
     background-color: #111;
     color: white;
@@ -68,7 +75,7 @@ label {
 
 .edit-btn:hover,
 .delete-btn:hover,
-.delete-rating-btn:hover,
+.delete-person-btn:hover,
 .save-btn:hover {
     background-color: #5e5e5e;
 }

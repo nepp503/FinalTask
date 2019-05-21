@@ -89,13 +89,16 @@ public class ConnectionPool {
         return isReturned;
     }
 
-    public void shutdownPool() throws ConnectionPoolException {
+    public void shutdownPool(){
         try {
+            for (ProxyConnection c : usedConnections) {
+                c.close();
+            }
             for (ProxyConnection c : availableConnection) {
                 c.reallyClose();
             }
         } catch (SQLException ex) {
-            throw new ConnectionPoolException("Exception in database", ex);
+            logger.log(Level.ERROR, ex);
         }
         availableConnection.clear();
     }

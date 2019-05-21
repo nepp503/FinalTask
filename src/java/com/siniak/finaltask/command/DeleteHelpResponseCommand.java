@@ -1,6 +1,7 @@
 package com.siniak.finaltask.command;
 
 import com.siniak.finaltask.exception.DaoException;
+import com.siniak.finaltask.exception.ServiceException;
 import com.siniak.finaltask.service.HelpResponseService;
 import com.siniak.finaltask.utils.SessionRequestContent;
 import org.apache.logging.log4j.Level;
@@ -15,9 +16,9 @@ public class DeleteHelpResponseCommand implements Command {
         try {
             service.deleteById(Integer.parseInt(content.getParameter(RESPONSE_ID_PARAMETR)));
             router.setPage(SEARCHED_PERSON_PAGE);
-        } catch (DaoException e) {
-            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
+        } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             router.setPage(ERROR_PAGE);
         }
         return router;

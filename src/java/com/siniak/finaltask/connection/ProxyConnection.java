@@ -64,7 +64,7 @@ public class ProxyConnection implements Connection {
     }
 
     public void reallyClose() throws SQLException {
-        connection.close(); //todo
+        connection.close();
     }
 
     @Override

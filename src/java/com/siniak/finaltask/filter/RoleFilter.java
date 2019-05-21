@@ -1,7 +1,7 @@
 package com.siniak.finaltask.filter;
 
 import com.siniak.finaltask.entity.User;
-import com.siniak.finaltask.entity.type.UserType;
+import com.siniak.finaltask.entity.UserType;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -17,7 +17,6 @@ public class RoleFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-        System.out.println("filter");
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         User user = (User) httpServletRequest.getSession().getAttribute(USER_ATTR);
         if (user == null || user.getUserType() == null) {
@@ -26,8 +25,5 @@ public class RoleFilter implements Filter {
             httpServletRequest.getSession().setAttribute(USER_ATTR, user);
         }
         filterChain.doFilter(request, response);
-    }
-
-    public void destroy() {
     }
 }

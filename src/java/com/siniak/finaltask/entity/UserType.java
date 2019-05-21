@@ -1,4 +1,4 @@
-package com.siniak.finaltask.entity.type;
+package com.siniak.finaltask.entity;
 
 public enum UserType {
     ADMIN,

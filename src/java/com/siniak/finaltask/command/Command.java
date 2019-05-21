@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public interface Command {
-    static final Logger logger = LogManager.getLogger();
+    Logger logger = LogManager.getLogger();
 
     Router execute(SessionRequestContent content);
 }

@@ -10,7 +10,7 @@ public class VolunteerQuery {
             "WHERE id=?";
     public final static String UPDATE_VOLUNTEER = "UPDATE volunteers " +
             "SET firstname=?, lastname=?, photo=?, yearsofwork=?, numberofoperations=? " +
-            "WHERE id=?";;
+            "WHERE id=?";
     public final static String DELETE_VOLUNTEER_BY_ID = "DELETE FROM volunteers " +
             "WHERE id=?";
     public final static String FIND_ALL_VOLUNTEERS = "SELECT " +

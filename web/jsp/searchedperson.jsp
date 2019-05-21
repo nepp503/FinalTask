@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--<%@ taglib prefix="ctg" uri="customtags" %>--%>
 <!DOCTYPE html>
 <html>
  <jsp:useBean id="searchedperson" scope="request" class="com.siniak.finaltask.entity.SearchedPerson"/>
 <head>
     <title>${searchedperson.firstName} ${searchedperson.lastName}</title>
     <meta charset="utf-8">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/personPage.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/updateReview.js"></script>
@@ -24,10 +24,14 @@
         <h2>${searchedperson.firstName} ${searchedperson.lastName}
             <c:set var="admin" value="ADMIN"/>
             <c:if test="${user.userType == admin}">
-                <button class="edit-by-admin-btn"><a
-                        href="controller?command=edit_person&personid=${searchedperson.id}"><i
-                        class="fa fa-pencil-square-o"
-                        aria-hidden="true"></i></a></button>
+                <button class="edit-by-admin-btn">
+                    <a href="controller?command=edit_person&personid=${searchedperson.id}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                </button>
+                <button class="delete-person-btn">
+                    <a href="controller?command=delete_person&personid=${searchedperson.id}">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </button>
             </c:if>
         </h2>
     </div>
@@ -125,7 +129,6 @@
             </c:if>
 
         </div>
-        <a href="${requestScope.previous_page}"><fmt:message key="back"/></a>
     </section>
 </section>
 <c:import url="footer.jsp"/>

@@ -3,6 +3,7 @@ package com.siniak.finaltask.command;
 import com.siniak.finaltask.entity.SearchedPerson;
 import com.siniak.finaltask.entity.Volunteer;
 import com.siniak.finaltask.exception.DaoException;
+import com.siniak.finaltask.exception.ServiceException;
 import com.siniak.finaltask.service.SearchedPersonService;
 import com.siniak.finaltask.service.VolunteerService;
 import com.siniak.finaltask.utils.SessionRequestContent;
@@ -20,9 +21,9 @@ public class ShowVolunteerPageCommand implements Command {
             Volunteer volunteer = service.findById(Integer.parseInt(content.getParameter(VOLUNTEER_ID_PARAMETR)));
             content.setRequestAttribute(VOLUNTEER_ATTR, volunteer);
             router.setPage(VOLUNTEER_PAGE);
-        } catch (DaoException e) {
-            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
+        } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             router.setPage(ERROR_PAGE);
         }
         return router;

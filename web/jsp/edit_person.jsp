@@ -75,9 +75,6 @@
             </c:otherwise>
         </c:choose>
     </form>
-    <div class="block">
-        <a href="${requestScope.previous_page}"><fmt:message key="back"/></a>
-    </div>
 </div>
 <c:import url="footer.jsp"/>
 </body>

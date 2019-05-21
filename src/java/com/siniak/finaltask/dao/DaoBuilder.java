@@ -5,26 +5,16 @@ import com.siniak.finaltask.exception.ConnectionPoolException;
 
 import java.sql.Connection;
 
-public class DaoManager {
-    private ConnectionPool pool = ConnectionPool.getInstance();
-    private Connection connection = null;
+public class DaoBuilder {
+    private Connection connection ;
 
-    public DaoManager() {
+    public DaoBuilder() {
         try {
-            this.connection = pool.getConnection();
+            this.connection = ConnectionPool.getInstance().getConnection();
         } catch (ConnectionPoolException e) {
             throw new RuntimeException();
         }
     }
-//    public AbstractDao createDao(Entity entity) throws ConnectionPoolException {
-//        AbstractDao dao = null;
-//        Connection connection = null;
-//        if (entity instanceof User) {
-//            connection = pool.getConnection();
-//            dao = new UserDao(connection);
-//        }
-//        return dao;
-//    }
 
     public UserDao getUserDao() {
         UserDao dao = new UserDao(connection);
