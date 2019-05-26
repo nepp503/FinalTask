@@ -2,11 +2,16 @@ package com.siniak.finaltask.dao;
 
 import com.siniak.finaltask.connection.ConnectionPool;
 import com.siniak.finaltask.exception.ConnectionPoolException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class DaoBuilder {
-    private Connection connection ;
+    static final Logger logger = LogManager.getLogger();
+    private Connection connection;
 
     public DaoBuilder() {
         try {
@@ -34,5 +39,13 @@ public class DaoBuilder {
     public HelpResponseDao getHelpResponseDao() {
         HelpResponseDao dao = new HelpResponseDao(connection);
         return dao;
+    }
+
+    public void finishRequest() {
+        try {
+            this.connection.close();
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, e);
+        }
     }
 }

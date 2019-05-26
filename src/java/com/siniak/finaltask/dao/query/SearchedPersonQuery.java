@@ -1,4 +1,4 @@
-package com.siniak.finaltask.dao.constants;
+package com.siniak.finaltask.dao.query;
 
 public class SearchedPersonQuery {
     public final static String INSERT_SEARCHED_PERSON = "INSERT INTO searchedpeople" +

@@ -5,20 +5,18 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static com.siniak.finaltask.constant.Constant.DATABASE_PATH;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.DATABASE_PATH;
 
 public class ConnectionPool {
     private static ConnectionPool instance;
@@ -104,7 +102,7 @@ public class ConnectionPool {
     }
 
     private ProxyConnection createConnection() throws ConnectionPoolException {
-        Connection connection = null;
+        Connection connection;
         try {
             connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {

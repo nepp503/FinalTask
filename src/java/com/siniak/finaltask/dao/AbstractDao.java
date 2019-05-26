@@ -28,7 +28,7 @@ public abstract class AbstractDao<E extends Entity> {
 
     public abstract E update(E entity) throws DaoException;
 
-    public void closeStatement(Statement statement) throws DaoException {
+    public void closeStatement(Statement statement){
         try {
             if (statement != null) {
                 statement.close();

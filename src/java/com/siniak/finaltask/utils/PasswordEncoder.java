@@ -9,21 +9,21 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class PasswordEncoder {
+    private static final String SALT = "NEPPVITALI";
     static final Logger logger = LogManager.getLogger();
 
-    public String encodePassword(String passwordToHash){
-        byte[] salt = new byte[0];
-        salt = getSalt();
-        String securePassword = get_SHA_256_SecurePassword(passwordToHash, salt);
+    public static String encodePassword(String passwordToHash){
+        String securePassword = get_SHA_256_SecurePassword(passwordToHash);
         return securePassword;
     }
 
 
-    private static String get_SHA_256_SecurePassword(String passwordToHash, byte[] salt)
+    private static String get_SHA_256_SecurePassword(String passwordToHash)
     {
         String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] salt = SALT.getBytes();
             md.update(salt);
             byte[] bytes = md.digest(passwordToHash.getBytes());
             StringBuilder sb = new StringBuilder();
@@ -35,17 +35,5 @@ public class PasswordEncoder {
             logger.log(Level.ERROR, e);
         }
         return generatedPassword;
-    }
-
-    private static byte[] getSalt(){
-        SecureRandom sr = null;
-        try {
-            sr = SecureRandom.getInstance("SHA1PRNG");
-        } catch (NoSuchAlgorithmException e) {
-            logger.log(Level.ERROR, e);
-        }
-        byte[] salt = new byte[16];
-        sr.nextBytes(salt);
-        return salt;
     }
 }

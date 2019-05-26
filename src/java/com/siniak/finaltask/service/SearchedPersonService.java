@@ -7,7 +7,7 @@ import com.siniak.finaltask.exception.ServiceException;
 
 import java.util.List;
 
-import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
 
 public class SearchedPersonService extends AbstractService {
 
@@ -43,6 +43,7 @@ public class SearchedPersonService extends AbstractService {
         try {
             return dao.update(person);
         } catch (DaoException ex) {
+            System.out.println(ex);
             throw new ServiceException(UPDATE_PERSON_ERROR_MSG, ex);
         }
     }

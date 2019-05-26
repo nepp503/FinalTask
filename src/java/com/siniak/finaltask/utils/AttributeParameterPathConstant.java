@@ -1,9 +1,15 @@
-package com.siniak.finaltask.constant;
+package com.siniak.finaltask.utils;
 
 import com.siniak.finaltask.manager.ConfigurationManager;
 import com.siniak.finaltask.manager.MessageManager;
 
-public class Constant {
+public class AttributeParameterPathConstant {
+    public static final String FORWARD = "FORWARD";
+    public static final String URL = "url";
+    public static final String UPLOAD_DIR = "uploads";
+    public static final String SEPARATOR = "/";
+    public static final String COMMAND_PARAMETR = "command";
+    public static final String ID_USER_PARAMETR = "iduser";
     public static final String ID_PARAMETR = "id";
     public static final String LOGIN_PARAMETR = "login";
     public static final String USER_LOGIN_PARAMETR = "userlogin";
@@ -11,6 +17,7 @@ public class Constant {
     public static final String EMAIL_PARAMETR = "email";
     public static final String FIRSTNAME_PARAMETR = "firstname";
     public static final String LASTNAME_PARAMETR = "lastname";
+    public static final String ROLE_PARAMETR = "role";
     public static final String BIRTH_PLACE_PARAMETR = "birthplace";
     public static final String SEARCH_AREA_PARAMETR = "searcharea";
     public static final String SPECIAl_SIGNS_PARAMETR = "specialsigns";
@@ -36,6 +43,8 @@ public class Constant {
     public static final String LIST_FIND_ATTR = "findlist";
     public static final String ERROR_MESSAGE_ATTR = "errorMessage";
     public static final String HELP_RESPONSES_ATTR = "responses";
+    public static final String SQL_FAILED_MSG = MessageManager.getProperty("sql.failed");
+    public static final String DELETE_USER_FAILED = MessageManager.getProperty("delete.user.error");
     public static final String CREATE_USER_ERROR_MSG = MessageManager.getProperty("create.user.error");
     public static final String FIND_USER_ERROR_MSG = MessageManager.getProperty("find.user.error");
     public static final String UPDATE_USER_ERROR_MSG = MessageManager.getProperty("update.user.error");
@@ -51,6 +60,7 @@ public class Constant {
     public static final String FIND_RESPONSE_ERROR_MSG = MessageManager.getProperty("find.response.error");
     public static final String UPDATE_RESPONSE_ERROR_MSG = MessageManager.getProperty("update.response.error");
     public static final String DELETE_RESPONSE_ERROR_MSG = MessageManager.getProperty("delete.response.error");
+    public static final String FILE_DOWNLOAD_ERROR_MSG = MessageManager.getProperty("file.download.failed");
     public static final String INDEX_PAGE = ConfigurationManager.getProperty("path.page.index");
     public static final String USER_PAGE = ConfigurationManager.getProperty("path.page.user");
     public static final String SEARCHED_PERSON_PAGE = ConfigurationManager.getProperty("path.page.searchedperson");
@@ -64,6 +74,6 @@ public class Constant {
     public static final String EDIT_USER_PAGE = ConfigurationManager.getProperty("path.page.edit_user");
     public static final String DATABASE_PATH = "database";
 
-    private Constant() {
+    private AttributeParameterPathConstant() {
     }
 }

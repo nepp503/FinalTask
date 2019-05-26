@@ -20,7 +20,7 @@
 
     <form class="edit-form" action="${pageContext.request.contextPath}/controller" method="post">
         <input type="hidden" name="command" value="update_user"/>
-        <input type="hidden" name="userid" value="${requestScope.user.id}"/>
+        <input type="hidden" name="userid" value="${sessionScope.user.id}"/>
 
         <div class="block">
             <label for="login"><fmt:message key="login"/></label><br>

@@ -1,6 +1,9 @@
 package com.siniak.finaltask.connection;
 
 import com.siniak.finaltask.exception.ConnectionPoolException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.Map;
@@ -9,6 +12,8 @@ import java.util.concurrent.Executor;
 
 public class ProxyConnection implements Connection {
     private Connection connection;
+    static final Logger logger = LogManager.getLogger();
+
 
     ProxyConnection(Connection connection) {
         this.connection = connection;
@@ -55,11 +60,11 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public void close() throws SQLException {
+    public void close() {
         try {
             ConnectionPool.getInstance().releaseConnection(this);
         } catch (ConnectionPoolException e) {
-            e.printStackTrace(); // todo
+            logger.log(Level.ERROR, e);
         }
     }
 

@@ -7,8 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siniak.finaltask.constant.Constant.*;
-import static com.siniak.finaltask.dao.constants.SearchedPersonQuery.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.dao.query.SearchedPersonQuery.*;
 
 public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
 
@@ -19,16 +19,15 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
     @Override
     public List<SearchedPerson> findAll() throws DaoException {
         List<SearchedPerson> people = new ArrayList<>();
-        Statement statement = null;
+        PreparedStatement statement = null;
         try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(FIND_ALL_SERCHED_PERSON);
+            statement = connection.prepareStatement(FIND_ALL_SERCHED_PERSON);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 people.add(defineSearchedPerson(resultSet));
             }
         } catch (SQLException ex) {
-            System.out.println(ex);// todo
-            throw new DaoException("SQL failed", ex);
+            throw new DaoException(FIND_PERSON_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -47,7 +46,7 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
                 person = defineSearchedPerson(resultSet);
             }
         } catch (SQLException ex) {
-            throw new DaoException("SQL request failed", ex);
+            throw new DaoException(FIND_PERSON_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -63,7 +62,7 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(DELETE_PERSON_ERROR_MSG, e);
         }
     }
 
@@ -81,7 +80,7 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
-            throw new DaoException(CREATE_USER_ERROR_MSG, ex);
+            throw new DaoException(CREATE_PERSON_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -103,7 +102,7 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
             preparedStatement.executeUpdate();
             return person;
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(UPDATE_PERSON_ERROR_MSG, e);
         }
     }
 
@@ -118,7 +117,7 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
                 people.add(defineSearchedPerson(resultSet));
             }
         } catch (SQLException ex) {
-            throw new DaoException("SQL request failed", ex);
+            throw new DaoException(FIND_PERSON_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }

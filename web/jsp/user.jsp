@@ -1,9 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<jsp:useBean id="user" scope="request" class="com.siniak.finaltask.entity.User"/>
+<jsp:useBean id="user" scope="session" class="com.siniak.finaltask.entity.User"/>
 <head>
     <title>${user.login}</title>
     <meta charset="utf-8">
@@ -28,12 +28,6 @@
             </c:if>
             <button class="edit-by-admin-btn"><a href="controller?command=edit_user&userid=${user.id}">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
-<%--            <div class="poster">--%>
-<%--                <a href="#">--%>
-<%--                    <img src="${pageContext.request.contextPath}/${searchedperson.photo}"--%>
-<%--                         alt="${searchedperson.firstName} ${searchedperson.lastName}"/>--%>
-<%--                </a>--%>
-<%--            </div>--%>
 
             <c:if test="${not empty user.firstName}">
                 <p><strong><fmt:message key="first.name"/>: </strong>${user.firstName}</p>

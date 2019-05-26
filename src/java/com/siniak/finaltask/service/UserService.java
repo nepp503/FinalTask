@@ -6,10 +6,10 @@ import com.siniak.finaltask.exception.DaoException;
 import com.siniak.finaltask.exception.ServiceException;
 import com.siniak.finaltask.utils.UserValidation;
 
-import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
 
 public class UserService extends AbstractService {
-    private UserValidation validation = new UserValidation();
+    private static UserValidation validation = new UserValidation();
 
     public User registerUser(User user) throws ServiceException {
         UserDao dao = manager.getUserDao();

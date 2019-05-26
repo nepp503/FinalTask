@@ -1,13 +1,13 @@
 package com.siniak.finaltask.command;
 
+import com.siniak.finaltask.controller.Router;
 import com.siniak.finaltask.entity.HelpResponse;
-import com.siniak.finaltask.exception.DaoException;
 import com.siniak.finaltask.exception.ServiceException;
 import com.siniak.finaltask.service.HelpResponseService;
-import com.siniak.finaltask.utils.SessionRequestContent;
+import com.siniak.finaltask.controller.SessionRequestContent;
 import org.apache.logging.log4j.Level;
 
-import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
 
 public class UpdateHelpResponseCommand implements Command{
     @Override
@@ -21,6 +21,8 @@ public class UpdateHelpResponseCommand implements Command{
             logger.log(Level.ERROR, e);
             content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             router.setPage(ERROR_PAGE);
+        }finally {
+            service.finishService();
         }
         return router;
     }

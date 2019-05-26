@@ -7,7 +7,7 @@ import com.siniak.finaltask.exception.ServiceException;
 
 import java.util.List;
 
-import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
 
 public class VolunteerService extends AbstractService {
 

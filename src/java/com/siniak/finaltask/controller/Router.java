@@ -1,6 +1,6 @@
-package com.siniak.finaltask.command;
+package com.siniak.finaltask.controller;
 
-import static com.siniak.finaltask.constant.Constant.INDEX_PAGE;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.INDEX_PAGE;
 
 public class Router {
     public enum PathType {

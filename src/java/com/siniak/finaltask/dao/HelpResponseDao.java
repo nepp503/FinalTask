@@ -1,16 +1,14 @@
 package com.siniak.finaltask.dao;
 
-import com.siniak.finaltask.entity.Entity;
 import com.siniak.finaltask.entity.HelpResponse;
-import com.siniak.finaltask.entity.Volunteer;
 import com.siniak.finaltask.exception.DaoException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siniak.finaltask.constant.Constant.*;
-import static com.siniak.finaltask.dao.constants.HelpResponseQuery.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.dao.query.HelpResponseQuery.*;
 
 public class HelpResponseDao extends AbstractDao<HelpResponse> {
     public HelpResponseDao(Connection connection) {
@@ -20,15 +18,15 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
     @Override
     public List<HelpResponse> findAll() throws DaoException {
         List<HelpResponse> responses = new ArrayList<>();
-        Statement statement = null;
+        PreparedStatement statement = null;
         try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(FIND_ALL_HELP_RESPONSES);
+            statement = connection.prepareStatement(FIND_ALL_HELP_RESPONSES);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 responses.add(defineHelpResponse(resultSet));
             }
         } catch (SQLException ex) {
-            throw new DaoException("SQL failed", ex);
+            throw new DaoException(FIND_RESPONSE_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -47,7 +45,7 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
                 response = defineHelpResponse(resultSet);
             }
         } catch (SQLException ex) {
-            throw new DaoException("SQL request failed", ex);
+            throw new DaoException(FIND_RESPONSE_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -63,7 +61,7 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(DELETE_RESPONSE_ERROR_MSG, e);
         }
     }
 
@@ -79,8 +77,7 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
             statement.setString(5, response.getUserLogin());
             statement.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println(ex);
-            throw new DaoException(CREATE_USER_ERROR_MSG, ex);
+            throw new DaoException(CREATE_RESPONSE_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -97,7 +94,7 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
             statement.setInt(3, response.getId());
             statement.executeUpdate();
         } catch (SQLException ex) {
-            throw new DaoException(CREATE_USER_ERROR_MSG, ex);
+            throw new DaoException(UPDATE_RESPONSE_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -115,8 +112,7 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
                 responses.add(defineHelpResponse(resultSet));
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
-            throw new DaoException("SQL request failed", ex);
+            throw new DaoException(FIND_RESPONSE_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -134,8 +130,7 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
                 responses.add(defineHelpResponse(resultSet));
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
-            throw new DaoException("SQL request failed", ex);
+            throw new DaoException(FIND_RESPONSE_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }

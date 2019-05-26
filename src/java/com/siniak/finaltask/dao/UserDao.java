@@ -3,14 +3,14 @@ package com.siniak.finaltask.dao;
 import com.siniak.finaltask.entity.User;
 import com.siniak.finaltask.entity.UserType;
 import com.siniak.finaltask.exception.DaoException;
+import com.siniak.finaltask.utils.PasswordEncoder;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siniak.finaltask.constant.Constant.*;
-import static com.siniak.finaltask.dao.constants.SearchedPersonQuery.UPDATE_SEARCHED_PERSON;
-import static com.siniak.finaltask.dao.constants.UserQuery.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.dao.query.UserQuery.*;
 
 public class UserDao extends AbstractDao<User> {
 
@@ -21,17 +21,17 @@ public class UserDao extends AbstractDao<User> {
     @Override
     public List<User> findAll() throws DaoException {
         List<User> users = new ArrayList<>();
-        Statement statement = null;
+        PreparedStatement statement = null;
         try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(FIND_ALL_USERS);
+            statement = connection.prepareStatement(FIND_ALL_USERS);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 User user = new User();
                 defineUser(resultSet, user);
                 users.add(user);
             }
         } catch (SQLException ex) {
-            throw new DaoException("SQL failed", ex);
+            throw new DaoException(FIND_USER_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -50,7 +50,7 @@ public class UserDao extends AbstractDao<User> {
                 defineUser(resultSet, user);
             }
         } catch (SQLException ex) {
-            throw new DaoException("SQL request failed", ex);
+            throw new DaoException(FIND_USER_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -67,7 +67,7 @@ public class UserDao extends AbstractDao<User> {
             statement.executeUpdate();
             result = true;
         } catch (SQLException ex) {
-            throw new DaoException("SQL request failed", ex);
+            throw new DaoException(DELETE_USER_FAILED, ex);
         } finally {
             closeStatement(statement);
         }
@@ -80,13 +80,12 @@ public class UserDao extends AbstractDao<User> {
         try {
             statement = connection.prepareStatement(INSERT_USER);
             statement.setString(1, user.getLogin());
-            statement.setString(2, user.getPassword());
+            statement.setString(2, PasswordEncoder.encodePassword(user.getPassword()));
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getFirstName());
             statement.setString(5, user.getLastName());
             statement.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println(ex);
             throw new DaoException(CREATE_USER_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
@@ -107,7 +106,7 @@ public class UserDao extends AbstractDao<User> {
             preparedStatement.executeUpdate();
             return user;
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(UPDATE_USER_ERROR_MSG, e);
         }
     }
 
@@ -117,7 +116,7 @@ public class UserDao extends AbstractDao<User> {
         try {
             statement = connection.prepareStatement(FIND_USER_BY_LOGIN_AND_PASSWORD);
             statement.setString(1, login);
-            statement.setString(2, password);
+            statement.setString(2, PasswordEncoder.encodePassword(password));
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 defineUser(resultSet, user);
@@ -129,13 +128,13 @@ public class UserDao extends AbstractDao<User> {
     }
 
     private User defineUser(ResultSet resultSet, User user) throws SQLException {
-        user.setId(resultSet.getInt("iduser"));
-        user.setLogin(resultSet.getString("login"));
-        user.setPassword(resultSet.getString("password"));
-        user.setEmail(resultSet.getString("email"));
-        user.setFirstName(resultSet.getString("firstname"));
-        user.setLastName(resultSet.getString("lastname"));
-        user.setUserType(UserType.valueOf(resultSet.getString("role").toUpperCase()));
+        user.setId(resultSet.getInt(ID_USER_PARAMETR));
+        user.setLogin(resultSet.getString(LOGIN_PARAMETR));
+        user.setPassword(resultSet.getString(PASSWORD_PARAMETR));
+        user.setEmail(resultSet.getString(EMAIL_PARAMETR));
+        user.setFirstName(resultSet.getString(FIRSTNAME_PARAMETR));
+        user.setLastName(resultSet.getString(LASTNAME_PARAMETR));
+        user.setUserType(UserType.valueOf(resultSet.getString(ROLE_PARAMETR).toUpperCase()));
         return user;
     }
 }

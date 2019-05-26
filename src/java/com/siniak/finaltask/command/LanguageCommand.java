@@ -1,9 +1,10 @@
 package com.siniak.finaltask.command;
 
-import com.siniak.finaltask.utils.SessionRequestContent;
+import com.siniak.finaltask.controller.Router;
+import com.siniak.finaltask.controller.SessionRequestContent;
 
-import static com.siniak.finaltask.constant.Constant.LANGUAGE_PARAMETR;
-import static com.siniak.finaltask.constant.Constant.LOCALE_ATTR;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.LANGUAGE_PARAMETR;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.LOCALE_ATTR;
 
 public class LanguageCommand implements Command {
 

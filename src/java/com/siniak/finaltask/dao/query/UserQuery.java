@@ -1,4 +1,4 @@
-package com.siniak.finaltask.dao.constants;
+package com.siniak.finaltask.dao.query;
 
 public class UserQuery {
     public final static String FIND_ALL_USERS = "SELECT iduser, login, password, email, firstname, lastname, role" +

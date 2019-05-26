@@ -7,8 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siniak.finaltask.constant.Constant.*;
-import static com.siniak.finaltask.dao.constants.VolunteerQuery.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.dao.query.VolunteerQuery.*;
 
 public class VolunteerDao extends AbstractDao<Volunteer> {
     public VolunteerDao(Connection connection) {
@@ -18,15 +18,15 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
     @Override
     public List<Volunteer> findAll() throws DaoException {
         List<Volunteer> volunteers = new ArrayList<>();
-        Statement statement = null;
+        PreparedStatement statement = null;
         try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(FIND_ALL_VOLUNTEERS);
+            statement = connection.prepareStatement(FIND_ALL_VOLUNTEERS);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 volunteers.add(defineVolunteer(resultSet));
             }
         } catch (SQLException ex) {
-            throw new DaoException("SQL failed", ex);
+            throw new DaoException(FIND_VOLUNTEER_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -45,7 +45,7 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
                 volunteer = defineVolunteer(resultSet);
             }
         } catch (SQLException ex) {
-            throw new DaoException("SQL request failed", ex);
+            throw new DaoException(FIND_VOLUNTEER_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -61,7 +61,7 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(DELETE_VOLUNTEER_ERROR_MSG, e);
         }
     }
 
@@ -77,7 +77,7 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
             statement.setInt(5, volunteer.getNumberOfOperations());
             statement.executeUpdate();
         } catch (SQLException ex) {
-            throw new DaoException(CREATE_USER_ERROR_MSG, ex);
+            throw new DaoException(CREATE_VOLUNTEER_ERROR_MSG, ex);
         } finally {
             closeStatement(statement);
         }
@@ -98,8 +98,7 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
             statement.executeUpdate();
             return volunteer;
         } catch (SQLException e) {
-            System.out.println(e);
-            throw new DaoException(e);
+            throw new DaoException(UPDATE_VOLUNTEER_ERROR_MSG, e);
         }
     }
 

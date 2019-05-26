@@ -7,4 +7,8 @@ public abstract class AbstractService {
 
     public AbstractService() {
     }
+
+    public void finishService() {
+        manager.finishRequest();
+    }
 }

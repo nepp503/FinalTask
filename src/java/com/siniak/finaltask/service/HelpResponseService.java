@@ -8,7 +8,7 @@ import com.siniak.finaltask.utils.HelpResponseValidation;
 
 import java.util.List;
 
-import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
 
 public class HelpResponseService extends AbstractService{
     HelpResponseValidation validation = new HelpResponseValidation();

@@ -1,4 +1,4 @@
-package com.siniak.finaltask.dao.constants;
+package com.siniak.finaltask.dao.query;
 
 public class HelpResponseQuery {
     public final static String INSERT_HELP_RESPONSE = "INSERT helpresponse" +

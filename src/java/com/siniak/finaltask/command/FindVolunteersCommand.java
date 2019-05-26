@@ -1,15 +1,15 @@
 package com.siniak.finaltask.command;
 
+import com.siniak.finaltask.controller.Router;
 import com.siniak.finaltask.entity.Volunteer;
-import com.siniak.finaltask.exception.DaoException;
 import com.siniak.finaltask.exception.ServiceException;
 import com.siniak.finaltask.service.VolunteerService;
-import com.siniak.finaltask.utils.SessionRequestContent;
+import com.siniak.finaltask.controller.SessionRequestContent;
 import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
-import static com.siniak.finaltask.constant.Constant.*;
+import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
 
 public class FindVolunteersCommand implements Command {
     @Override
@@ -24,6 +24,8 @@ public class FindVolunteersCommand implements Command {
             logger.log(Level.ERROR, e);
             content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
             router.setPage(ERROR_PAGE);
+        }finally {
+            service.finishService();
         }
         return router;
     }

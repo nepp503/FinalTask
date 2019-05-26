@@ -18,14 +18,15 @@
         <h2><fmt:message key="edit.volunteer"/></h2>
     </div>
 
-    <form class="edit-form" action="${pageContext.request.contextPath}/controller" method="post">
+    <form class="edit-form" action="${pageContext.request.contextPath}/controller" method="post"
+          enctype="multipart/form-data">
         <c:choose>
             <c:when test="${empty requestScope.volunteer}">
                 <input type="hidden" name="command" value="create_volunteer"/>
             </c:when>
             <c:otherwise>
                 <input type="hidden" name="command" value="update_volunteer"/>
-                <input type="hidden" name="personid" value="${requestScope.volunteer.id}"/>
+                <input type="hidden" name="volunteerid" value="${requestScope.volunteer.id}"/>
             </c:otherwise>
         </c:choose>
         <div class="block">
@@ -52,10 +53,11 @@
                    value="${requestScope.volunteer.numberOfOperations}"/>
         </div>
 
-        <%--        <div class="block">--%>
-        <%--            <label for="poster">Poster</label><br/>--%>
-        <%--            <input type="text" id="poster" name="poster" value="${requestScope.movie.poster}"/>--%>
-        <%--        </div>--%>
+        <div class="block">
+            <label for="poster">Poster</label><br/>
+            <input type="file" id="poster" name="poster" height="200">
+        </div>
+
         <c:choose>
             <c:when test="${empty requestScope.volunteer}">
                 <div class="block">

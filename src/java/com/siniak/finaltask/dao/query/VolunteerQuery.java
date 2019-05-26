@@ -1,4 +1,4 @@
-package com.siniak.finaltask.dao.constants;
+package com.siniak.finaltask.dao.query;
 
 public class VolunteerQuery {
     public final static String INSERT_VOLUNTEER = "INSERT volunteers" +

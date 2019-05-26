@@ -4,7 +4,14 @@
 <%--<%@ taglib prefix="ctg" uri="customtags" %>--%>
 <!DOCTYPE html>
 <html>
-<jsp:useBean id="volunteer" scope="request" class="com.siniak.finaltask.entity.Volunteer"/>
+    <c:choose>
+        <c:when test="${not empty requestScope.volunteer}">
+            <c:set value="${requestScope.volunteer}" var="volunteer"/>
+        </c:when>
+        <c:otherwise>
+            <c:set value="${sessionScope.volunteer}" var="volunteer"/>
+        </c:otherwise>
+    </c:choose>
 <head>
     <title>${volunteer.firstName} ${volunteer.lastName}</title>
     <meta charset="utf-8">
@@ -28,7 +35,7 @@
                         class="fa fa-pencil-square-o"
                         aria-hidden="true"></i></a></button>
                 <button class="delete-person-btn">
-                    <a href="controller?command=delete_volunteer&personid=${volunteer.id}">
+                    <a href="controller?command=delete_volunteer&volunteerid=${volunteer.id}">
                         <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </button>
             </c:if>

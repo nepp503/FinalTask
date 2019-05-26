@@ -3,7 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
- <jsp:useBean id="searchedperson" scope="request" class="com.siniak.finaltask.entity.SearchedPerson"/>
+     <c:choose>
+         <c:when test="${not empty requestScope.searchedperson}">
+             <c:set value="${requestScope.searchedperson}" var="searchedperson"/>
+         </c:when>
+         <c:otherwise>
+             <c:set value="${sessionScope.searchedperson}" var="searchedperson"/>
+         </c:otherwise>
+     </c:choose>
 <head>
     <title>${searchedperson.firstName} ${searchedperson.lastName}</title>
     <meta charset="utf-8">

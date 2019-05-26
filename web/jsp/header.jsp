@@ -30,10 +30,12 @@
                 </form>
             </li>
             <li>
-                <a href="controller?command=find_all_searched_people"><fmt:message key="searched_people"/> </a>
+                <a href="${pageContext.request.contextPath}/controller?command=find_all_searched_people">
+                    <fmt:message key="searched_people"/> </a>
             </li>
             <li>
-                <a href="controller?command=find_volunteers"><fmt:message key="volunteers"/></a>
+                <a href="${pageContext.request.contextPath}/controller?command=find_volunteers">
+                    <fmt:message key="volunteers"/></a>
             </li>
 
             <c:set var="user" value="${sessionScope.user}"/>
