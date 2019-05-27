@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 
 public class ShowUserPageCommand implements Command {
     @Override

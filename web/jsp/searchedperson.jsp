@@ -67,8 +67,16 @@
 
             <c:set var="addedResponse" value="false"/>
 
-            <c:if test="${not empty requestScope.responses}">
-                <c:set var="helpResponses" value="${requestScope.responses}"/>
+            <c:choose>
+                <c:when test="${not empty requestScope.responses}">
+                    <c:set var="helpResponses" value="${requestScope.responses}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="helpResponses" value="${sessionScope.responses}"/>
+                </c:otherwise>
+            </c:choose>
+
+            <c:if test="${not empty helpResponses}">
                 <p><strong><fmt:message key="responses"/> : </strong></p>
                 <c:forEach var="response" items="${helpResponses}">
                     <c:choose>
@@ -83,18 +91,22 @@
                                                                                         aria-hidden="true"></i></button>
                                     </div>
 
-                                    <form action="controller" method="post" class="delete-review-form">
+                                    <form action="${pageContext.request.contextPath}/controller" method="post"
+                                          class="delete-review-form">
                                         <input type="hidden" name="command" value="delete_help_response"/>
                                         <input type="hidden" name="responseid" value="${response.id}"/>
+                                        <input type="hidden" name="personid" value="${response.searchedPersonId}"/>
                                         <div class="btn">
                                             <button class="delete-btn"><i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </form>
 
-                                    <form action="controller" method="post" id="edit-review-form-${response.id}">
-                                        <input type="hidden" name="responseid" value="${response.id}"/>
+                                    <form action="${pageContext.request.contextPath}/controller" method="post"
+                                          id="edit-review-form-${response.id}">
                                         <input type="hidden" name="command" value="update_help_response"/>
+                                        <input type="hidden" name="responseid" value="${response.id}"/>
+                                        <input type="hidden" name="personid" value="${response.searchedPersonId}"/>
                                         <input type="hidden" name="review"/>
 
                                         <div class="btn">
@@ -122,7 +134,7 @@
             </c:if>
 
             <c:if test="${user.id != 0 and not addedReview}">
-                <form action="controller" method="post">
+                <form action="${pageContext.request.contextPath}/controller" method="post">
                     <input type="hidden" name="command" value="create_help_response"/>
                     <input type="hidden" name="userid" value="${user.id}"/>
                     <input type="hidden" name="personid" value="${searchedperson.id}"/>

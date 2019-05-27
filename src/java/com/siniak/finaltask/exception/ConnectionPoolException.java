@@ -1,5 +1,10 @@
 package com.siniak.finaltask.exception;
 
+/**
+ * Thrown in ConnectionPool
+ * @author Vitali Siniak
+ */
+
 public class ConnectionPoolException extends Exception {
     public ConnectionPoolException() {
     }

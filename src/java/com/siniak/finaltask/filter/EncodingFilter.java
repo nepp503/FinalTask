@@ -1,10 +1,14 @@
 package com.siniak.finaltask.filter;
 
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
+
+/**
+ * Encoding filter
+ * @author Vitali Siniak
+ */
 
 @WebFilter(urlPatterns = {"/*"},
         initParams = {

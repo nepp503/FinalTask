@@ -1,5 +1,9 @@
 package com.siniak.finaltask.entity;
 
+/**
+ * User entity
+ * @author Vitali Siniak
+ */
 public class User extends Entity{
     private int id;
     private String login;

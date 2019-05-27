@@ -4,9 +4,14 @@ import com.siniak.finaltask.dao.UserDao;
 import com.siniak.finaltask.entity.User;
 import com.siniak.finaltask.exception.DaoException;
 import com.siniak.finaltask.exception.ServiceException;
-import com.siniak.finaltask.utils.UserValidation;
+import com.siniak.finaltask.util.UserValidation;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
+
+/**
+ * Service for users
+ * @author Vitali Siniak
+ */
 
 public class UserService extends AbstractService {
     private static UserValidation validation = new UserValidation();

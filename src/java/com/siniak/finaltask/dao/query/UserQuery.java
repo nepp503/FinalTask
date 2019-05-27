@@ -1,5 +1,10 @@
 package com.siniak.finaltask.dao.query;
 
+/**
+ * Queries for UserDao
+ * @author Vitali Siniak
+ */
+
 public class UserQuery {
     public final static String FIND_ALL_USERS = "SELECT iduser, login, password, email, firstname, lastname, role" +
             " FROM users";
@@ -14,4 +19,7 @@ public class UserQuery {
     public final static String UPDATE_USER = "UPDATE users " +
             "SET login=?, firstname=?, lastname=?, email=? " +
             "WHERE iduser=?";
+
+    private UserQuery() {
+    }
 }

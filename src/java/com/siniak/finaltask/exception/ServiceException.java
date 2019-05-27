@@ -1,5 +1,10 @@
 package com.siniak.finaltask.exception;
 
+/**
+ * Thrown in service layer
+ * @author Vitali Siniak
+ */
+
 public class ServiceException extends Exception {
     public ServiceException() {
     }

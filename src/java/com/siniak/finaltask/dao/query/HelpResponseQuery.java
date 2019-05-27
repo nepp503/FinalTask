@@ -1,5 +1,10 @@
 package com.siniak.finaltask.dao.query;
 
+/**
+ * Queries for HelpResponseDao
+ * @author Vitali Siniak
+ */
+
 public class HelpResponseQuery {
     public final static String INSERT_HELP_RESPONSE = "INSERT helpresponse" +
             "(userid, personid, title, body, userlogin) " +
@@ -21,4 +26,7 @@ public class HelpResponseQuery {
     public final static String FIND_HELP_RESPONSE_BY_USER_ID = "SELECT id, userid, personid, title, body, userlogin " +
             "FROM helpresponse " +
             "WHERE userid=?";
+
+    private HelpResponseQuery() {
+    }
 }

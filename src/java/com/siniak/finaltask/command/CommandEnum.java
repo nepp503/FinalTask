@@ -1,5 +1,10 @@
 package com.siniak.finaltask.command;
 
+/**
+ * Contains and defines all types of commands.
+ * @author Vitali Siniak
+ */
+
 public enum CommandEnum {
     LOGIN {
         {
@@ -145,8 +150,13 @@ public enum CommandEnum {
         }
     };
 
-    Command command;
+    protected Command command;
 
+    /**
+     * Returns specific implementation of interface Command.
+     * @return
+     * @see Command
+     */
     public Command getCurrentCommand() {
         return command;
     }

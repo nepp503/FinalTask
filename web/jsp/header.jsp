@@ -19,7 +19,7 @@
                 <a href="${pageContext.request.contextPath}/index.jsp" class="site-name">SearchingService</a>
             </li>
             <li>
-                <form action="controller" method="get">
+                <form action="${pageContext.request.contextPath}/controller" method="get">
                     <input type="hidden" name="command" value="change_language">
                     <select title="language-select" class="language-select" name="language"
                             onchange="this.form.submit()">
@@ -42,10 +42,12 @@
             <c:choose>
                 <c:when test="${not empty user.login}">
                     <li>
-                        <a href="controller?command=show_user_page&userid=${user.id}">${user.login}</a>
+                        <a href="${pageContext.request.contextPath}/controller?command=show_user_page&userid=${user.id}"
+                        >${user.login}</a>
                     </li>
                     <li>
-                        <a href="controller?command=logout"><fmt:message key="logout"/></a>
+                        <a href="${pageContext.request.contextPath}/controller?command=logout">
+                            <fmt:message key="logout"/></a>
                     </li>
                 </c:when>
                 <c:otherwise>

@@ -16,7 +16,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.DATABASE_PATH;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.DATABASE_PATH;
+
+/**
+ * Class provides access to connections to database.
+ * Implements Singleton pattern.
+ * @author Vitali Siniak
+ */
 
 public class ConnectionPool {
     private static ConnectionPool instance;
@@ -36,6 +42,11 @@ public class ConnectionPool {
     private ConnectionPool(){
     }
 
+    /**
+     * Provides access to the only instance of the class.
+     * @return
+     * @see ConnectionPool
+     */
     public static ConnectionPool getInstance(){
         if(!instanceCreated.get()){
             singletonLock.lock();
@@ -55,6 +66,12 @@ public class ConnectionPool {
         return instance;
     }
 
+    /**
+     * Returns connection from the pool.
+     * @return
+     * @see ProxyConnection
+     * @throws ConnectionPoolException is thrown if there is an error in creation connection.
+     */
     public ProxyConnection getConnection() throws ConnectionPoolException {
         ProxyConnection connection = null;
         try {
@@ -71,7 +88,14 @@ public class ConnectionPool {
         return connection;
     }
 
-    public boolean releaseConnection(ProxyConnection connection) throws ConnectionPoolException {
+    /**
+     * Putting connection back into pool.
+     * @param connection
+     * @see ProxyConnection
+     * @return true, if returning connection back to pool is successful,
+     * false - if returning connection back to pool failed
+     */
+    public boolean releaseConnection(ProxyConnection connection){
         boolean isReturned = false;
         try {
             if (!connection.getAutoCommit()) {
@@ -80,13 +104,16 @@ public class ConnectionPool {
             availableConnection.put(connection);
             isReturned = usedConnections.remove(connection);
         } catch (SQLException ex) {
-            throw new ConnectionPoolException("Exception in database", ex);
+            return false;
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
         return isReturned;
     }
 
+    /**
+     * Destroys the pool
+     */
     public void shutdownPool(){
         try {
             for (ProxyConnection c : usedConnections) {

@@ -8,7 +8,7 @@ import com.siniak.finaltask.service.SearchedPersonService;
 import com.siniak.finaltask.controller.SessionRequestContent;
 import org.apache.logging.log4j.Level;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 
 public class UpdateSearchedPersonCommand implements Command {
     @Override

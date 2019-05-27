@@ -4,11 +4,16 @@ import com.siniak.finaltask.dao.HelpResponseDao;
 import com.siniak.finaltask.entity.HelpResponse;
 import com.siniak.finaltask.exception.DaoException;
 import com.siniak.finaltask.exception.ServiceException;
-import com.siniak.finaltask.utils.HelpResponseValidation;
+import com.siniak.finaltask.util.HelpResponseValidation;
 
 import java.util.List;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
+
+/**
+ * Service for help responses
+ * @author Vitali Siniak
+ */
 
 public class HelpResponseService extends AbstractService{
     HelpResponseValidation validation = new HelpResponseValidation();
@@ -48,13 +53,9 @@ public class HelpResponseService extends AbstractService{
         return userResponse;
     }
 
-    public void deleteById(int id) throws ServiceException {
+    public void deleteById(int id){
         HelpResponseDao dao = manager.getHelpResponseDao();
-        try {
-            dao.deleteById(id);
-        } catch (DaoException ex) {
-            throw new ServiceException(DELETE_RESPONSE_ERROR_MSG, ex);
-        }
+        dao.deleteById(id);
     }
 
     public List<HelpResponse> findByPersonId(int personId) throws ServiceException {

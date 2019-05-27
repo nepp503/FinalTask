@@ -7,7 +7,12 @@ import com.siniak.finaltask.exception.ServiceException;
 
 import java.util.List;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
+
+/**
+ * Service for volunteers
+ * @author Vitali Siniak
+ */
 
 public class VolunteerService extends AbstractService {
 
@@ -47,12 +52,8 @@ public class VolunteerService extends AbstractService {
         }
     }
 
-    public boolean deleteById(int id) throws ServiceException {
+    public boolean deleteById(int id){
         VolunteerDao dao = manager.getVolunteerDao();
-        try {
-            return dao.deleteById(id);
-        } catch (DaoException ex) {
-            throw new ServiceException(DELETE_VOLUNTEER_ERROR_MSG, ex);
-        }
+        return dao.deleteById(id);
     }
 }

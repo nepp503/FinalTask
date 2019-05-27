@@ -7,7 +7,12 @@ import com.siniak.finaltask.exception.ServiceException;
 
 import java.util.List;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
+
+/**
+ * Service for searched people
+ * @author Vitali Siniak
+ */
 
 public class SearchedPersonService extends AbstractService {
 
@@ -57,12 +62,8 @@ public class SearchedPersonService extends AbstractService {
         }
     }
 
-    public boolean deleteById(int id) throws ServiceException {
+    public boolean deleteById(int id) {
         SearchedPersonDao dao = manager.getSearchedPersonDao();
-        try {
-            return dao.deleteById(id);
-        } catch (DaoException ex) {
-            throw new ServiceException(DELETE_PERSON_ERROR_MSG, ex);
-        }
+        return dao.deleteById(id);
     }
 }

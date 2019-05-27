@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.FORWARD;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.FORWARD;
 
 @WebServlet(name = "Controller", urlPatterns = {"/controller"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,

@@ -8,6 +8,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+/**
+ * Builder for all DAOs in project
+ * @author Vitali Siniak
+ */
 
 public class DaoBuilder {
     static final Logger logger = LogManager.getLogger();
@@ -41,6 +45,9 @@ public class DaoBuilder {
         return dao;
     }
 
+    /**
+     * Returns connection back to pool after all operations
+     */
     public void finishRequest() {
         try {
             this.connection.close();

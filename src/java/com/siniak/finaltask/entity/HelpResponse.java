@@ -1,5 +1,9 @@
 package com.siniak.finaltask.entity;
 
+/**
+ * HelpResponse entity
+ * @author Vitali Siniak
+ */
 public class HelpResponse extends Entity {
     private int id;
     private int userId;

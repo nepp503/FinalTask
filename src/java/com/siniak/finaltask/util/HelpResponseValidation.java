@@ -1,8 +1,20 @@
-package com.siniak.finaltask.utils;
+package com.siniak.finaltask.util;
 
 import com.siniak.finaltask.entity.HelpResponse;
 
+/**
+ * Validation of help response
+ * @author Vitali Siniak
+ */
+
 public class HelpResponseValidation {
+
+    /**
+     * Checks if help response valid or not
+     * @param response
+     * @see HelpResponse
+     * @return true, if help response is valid, false - otherwise
+     */
     public boolean isValid(HelpResponse response) {
         return isTitleValid(response.getTitle()) && isBodyValid(response.getBody());
     }

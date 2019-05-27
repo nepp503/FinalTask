@@ -1,5 +1,10 @@
 package com.siniak.finaltask.dao.query;
 
+/**
+ * Queries for SearchedPersonDao
+ * @author Vitali Siniak
+ */
+
 public class SearchedPersonQuery {
     public final static String INSERT_SEARCHED_PERSON = "INSERT INTO searchedpeople" +
             "(firstname, lastname, birthplace, searcharea, specialsigns, photo) " +
@@ -19,4 +24,7 @@ public class SearchedPersonQuery {
             "id, firstname, lastname, birthplace, searcharea, specialsigns, photo " +
             "FROM searchedpeople " +
             "WHERE lastname LIKE ?";
+
+    private SearchedPersonQuery() {
+    }
 }

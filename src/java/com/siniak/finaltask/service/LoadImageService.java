@@ -1,7 +1,6 @@
 package com.siniak.finaltask.service;
 
 import com.siniak.finaltask.exception.ServiceException;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,11 +10,24 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.UUID;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
+
+/**
+ * Service for image loading
+ * @author Vitali Siniak
+ */
 
 public class LoadImageService extends AbstractService{
-    static final Logger logger = LogManager.getLogger();
 
+    /**
+     * Loads image and returns path to it
+     * @param parts
+     * @see Collection
+     * @see Part
+     * @param applicationDir - application directory
+     * @return image path
+     * @throws ServiceException
+     */
     public String loadImage(Collection<Part> parts, String applicationDir) throws ServiceException {
         String uploadFileDir = applicationDir + UPLOAD_DIR + SEPARATOR;
         File fileSaveDir = new File(uploadFileDir);

@@ -8,6 +8,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * Role filter
+ * @author Vitali Siniak
+ */
+
 @WebFilter(urlPatterns = "/controller", servletNames = "Controller")
 public class RoleFilter implements Filter {
     private static final String USER_ATTR = "user";

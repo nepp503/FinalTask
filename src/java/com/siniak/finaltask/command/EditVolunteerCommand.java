@@ -7,7 +7,7 @@ import com.siniak.finaltask.service.VolunteerService;
 import com.siniak.finaltask.controller.SessionRequestContent;
 import org.apache.logging.log4j.Level;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 
 public class EditVolunteerCommand implements Command {
     public Router execute(SessionRequestContent content) {

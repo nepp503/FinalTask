@@ -7,8 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 import static com.siniak.finaltask.dao.query.SearchedPersonQuery.*;
+
+/**
+ * DAO for searched people
+ * @author Vitali Siniak
+ */
 
 public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
 
@@ -54,7 +59,7 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
     }
 
     @Override
-    public boolean deleteById(int id) throws DaoException {
+    public boolean deleteById(int id) {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(DELETE_SEARCHED_PERSON_BY_ID);
@@ -62,7 +67,9 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new DaoException(DELETE_PERSON_ERROR_MSG, e);
+            return false;
+        } finally {
+            closeStatement(preparedStatement);
         }
     }
 
@@ -106,6 +113,12 @@ public class SearchedPersonDao extends AbstractDao<SearchedPerson> {
         }
     }
 
+    /**
+     * Finds all searched people by part of their name
+     * @param name - name or name part
+     * @return all people with names includes name part
+     * @throws DaoException
+     */
     public List<SearchedPerson> findPersonByNamePart(String name) throws DaoException {
         List<SearchedPerson> people = new ArrayList<>();
         PreparedStatement statement = null;

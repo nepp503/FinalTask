@@ -3,15 +3,19 @@ package com.siniak.finaltask.dao;
 import com.siniak.finaltask.entity.User;
 import com.siniak.finaltask.entity.UserType;
 import com.siniak.finaltask.exception.DaoException;
-import com.siniak.finaltask.utils.PasswordEncoder;
+import com.siniak.finaltask.util.PasswordEncoder;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 import static com.siniak.finaltask.dao.query.UserQuery.*;
 
+/**
+ * DAO for users
+ * @author Vitali Siniak
+ */
 public class UserDao extends AbstractDao<User> {
 
     public UserDao(Connection connection) {
@@ -58,7 +62,7 @@ public class UserDao extends AbstractDao<User> {
     }
 
     @Override
-    public boolean deleteById(int id) throws DaoException {
+    public boolean deleteById(int id) {
         boolean result = false;
         PreparedStatement statement = null;
         try {
@@ -67,7 +71,7 @@ public class UserDao extends AbstractDao<User> {
             statement.executeUpdate();
             result = true;
         } catch (SQLException ex) {
-            throw new DaoException(DELETE_USER_FAILED, ex);
+            return false;
         } finally {
             closeStatement(statement);
         }
@@ -78,13 +82,17 @@ public class UserDao extends AbstractDao<User> {
     public User create(User user) throws DaoException {
         PreparedStatement statement = null;
         try {
-            statement = connection.prepareStatement(INSERT_USER);
+            statement = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getLogin());
-            statement.setString(2, PasswordEncoder.encodePassword(user.getPassword()));
+            statement.setString(2, PasswordEncoder.encodePassword(user.getPassword(), user.getLogin()));
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getFirstName());
             statement.setString(5, user.getLastName());
             statement.executeUpdate();
+            ResultSet generatedKey = statement.getGeneratedKeys();
+            if (generatedKey.next()) {
+                user.setId(generatedKey.getInt(1));
+            }
         } catch (SQLException ex) {
             throw new DaoException(CREATE_USER_ERROR_MSG, ex);
         } finally {
@@ -110,13 +118,20 @@ public class UserDao extends AbstractDao<User> {
         }
     }
 
+    /**
+     * Finds user with login and password
+     * @param login - user login
+     * @param password - user password
+     * @return user with these login and password
+     * @throws DaoException
+     */
     public User findByLoginAndPassword(String login, String password) throws DaoException {
         User user = new User();
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(FIND_USER_BY_LOGIN_AND_PASSWORD);
             statement.setString(1, login);
-            statement.setString(2, PasswordEncoder.encodePassword(password));
+            statement.setString(2, PasswordEncoder.encodePassword(password, login));
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 defineUser(resultSet, user);

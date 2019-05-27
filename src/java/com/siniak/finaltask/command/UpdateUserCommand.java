@@ -3,18 +3,16 @@ package com.siniak.finaltask.command;
 import com.siniak.finaltask.controller.Router;
 import com.siniak.finaltask.entity.User;
 import com.siniak.finaltask.exception.ServiceException;
-import com.siniak.finaltask.service.LoadImageService;
 import com.siniak.finaltask.service.UserService;
 import com.siniak.finaltask.controller.SessionRequestContent;
 import org.apache.logging.log4j.Level;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 
 public class UpdateUserCommand implements Command{
     @Override
     public Router execute(SessionRequestContent content) {
         UserService service = new UserService();
-        LoadImageService loadService = new LoadImageService();
         Router router = new Router();
         try {
             User user = service.update(updateUser(content));
@@ -38,7 +36,6 @@ public class UpdateUserCommand implements Command{
         user.setEmail(content.getParameter(EMAIL_PARAMETR));
         user.setFirstName(content.getParameter(FIRSTNAME_PARAMETR));
         user.setLastName(content.getParameter(LASTNAME_PARAMETR));
-//        user.setPhoto;
         return user;
     }
 }

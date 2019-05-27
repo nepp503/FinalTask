@@ -7,8 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 import static com.siniak.finaltask.dao.query.HelpResponseQuery.*;
+
+/**
+ * DAO for help responses
+ * @author Vitali Siniak
+ */
 
 public class HelpResponseDao extends AbstractDao<HelpResponse> {
     public HelpResponseDao(Connection connection) {
@@ -53,7 +58,7 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
     }
 
     @Override
-    public boolean deleteById(int id) throws DaoException {
+    public boolean deleteById(int id){
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(DELETE_HELP_RESPONSE_BY_ID);
@@ -61,7 +66,7 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new DaoException(DELETE_RESPONSE_ERROR_MSG, e);
+            return false;
         }
     }
 
@@ -101,6 +106,14 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
         return response;
     }
 
+    /**
+     * Finds all help responses of searched person
+     * @param personId - id of the person
+     * @return list of help responses of specific searched person
+     * @see List
+     * @see HelpResponse
+     * @throws DaoException
+     */
     public List<HelpResponse> findByPersonId(int personId) throws DaoException {
         List<HelpResponse> responses = new ArrayList<>();
         PreparedStatement statement = null;
@@ -119,6 +132,12 @@ public class HelpResponseDao extends AbstractDao<HelpResponse> {
         return responses;
     }
 
+    /**
+     * Finds all help responses left by user
+     * @param userId - user id
+     * @return list of help responses of specific user
+     * @throws DaoException
+     */
     public List<HelpResponse> findByUserId(int userId) throws DaoException {
         List<HelpResponse> responses = new ArrayList<>();
         PreparedStatement statement = null;

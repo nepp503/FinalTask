@@ -1,7 +1,12 @@
-package com.siniak.finaltask.utils;
+package com.siniak.finaltask.util;
 
 import com.siniak.finaltask.manager.ConfigurationManager;
 import com.siniak.finaltask.manager.MessageManager;
+
+/**
+ * Constants for project
+ * @author Vitali Siniak
+ */
 
 public class AttributeParameterPathConstant {
     public static final String FORWARD = "FORWARD";

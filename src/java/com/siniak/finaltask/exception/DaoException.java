@@ -1,5 +1,10 @@
 package com.siniak.finaltask.exception;
 
+/**
+ * Thrown in DAO layer
+ * @author Vitali Siniak
+ */
+
 public class DaoException extends Exception {
     public DaoException() {
     }

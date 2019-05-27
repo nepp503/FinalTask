@@ -7,7 +7,7 @@ import com.siniak.finaltask.service.UserService;
 import com.siniak.finaltask.controller.SessionRequestContent;
 import org.apache.logging.log4j.Level;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 
 public class SignUpCommand implements Command{
 
@@ -36,6 +36,7 @@ public class SignUpCommand implements Command{
         User user = new User();
         user.setLogin(content.getParameter(LOGIN_PARAMETR));
         user.setPassword(content.getParameter(PASSWORD_PARAMETR));
+        user.setEmail(content.getParameter(EMAIL_PARAMETR));
         user.setFirstName(content.getParameter(FIRSTNAME_PARAMETR));
         user.setLastName(content.getParameter(LASTNAME_PARAMETR));
         return user;

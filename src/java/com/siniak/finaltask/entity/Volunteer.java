@@ -1,7 +1,8 @@
 package com.siniak.finaltask.entity;
 
-import java.util.List;
-
+/**Volunteer entity
+ * @author Vitali Siniak
+ */
 public class Volunteer extends Entity {
     private int id;
     private String firstName;

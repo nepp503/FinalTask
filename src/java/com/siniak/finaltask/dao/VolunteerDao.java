@@ -7,8 +7,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.*;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.*;
 import static com.siniak.finaltask.dao.query.VolunteerQuery.*;
+
+/**DAO for volunteers
+ * @author Vitali Siniak
+ */
 
 public class VolunteerDao extends AbstractDao<Volunteer> {
     public VolunteerDao(Connection connection) {
@@ -53,7 +57,7 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
     }
 
     @Override
-    public boolean deleteById(int id) throws DaoException {
+    public boolean deleteById(int id) {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(DELETE_VOLUNTEER_BY_ID);
@@ -61,7 +65,9 @@ public class VolunteerDao extends AbstractDao<Volunteer> {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw new DaoException(DELETE_VOLUNTEER_ERROR_MSG, e);
+            return false;
+        } finally {
+            closeStatement(preparedStatement);
         }
     }
 

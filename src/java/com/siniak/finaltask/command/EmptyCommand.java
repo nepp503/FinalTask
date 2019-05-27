@@ -3,7 +3,7 @@ package com.siniak.finaltask.command;
 import com.siniak.finaltask.controller.Router;
 import com.siniak.finaltask.controller.SessionRequestContent;
 
-import static com.siniak.finaltask.utils.AttributeParameterPathConstant.ERROR_PAGE;
+import static com.siniak.finaltask.util.AttributeParameterPathConstant.ERROR_PAGE;
 
 public class EmptyCommand implements Command {
     @Override

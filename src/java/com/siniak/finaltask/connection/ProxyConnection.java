@@ -1,19 +1,18 @@
 package com.siniak.finaltask.connection;
 
-import com.siniak.finaltask.exception.ConnectionPoolException;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * Implements interface Connection and has almost the same functionality
+ * Implements Proxy pattern
+ * @author Vitali Siniak
+ */
+
 public class ProxyConnection implements Connection {
     private Connection connection;
-    static final Logger logger = LogManager.getLogger();
-
 
     ProxyConnection(Connection connection) {
         this.connection = connection;
@@ -61,11 +60,7 @@ public class ProxyConnection implements Connection {
 
     @Override
     public void close() {
-        try {
-            ConnectionPool.getInstance().releaseConnection(this);
-        } catch (ConnectionPoolException e) {
-            logger.log(Level.ERROR, e);
-        }
+        ConnectionPool.getInstance().releaseConnection(this);
     }
 
     public void reallyClose() throws SQLException {
