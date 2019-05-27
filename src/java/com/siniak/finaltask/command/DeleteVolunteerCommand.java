@@ -16,10 +16,6 @@ public class DeleteVolunteerCommand implements Command {
         try {
             service.deleteById(Integer.parseInt(content.getParameter(VOLUNTEER_ID_PARAMETR)));
             router.setRedirect();
-        } catch (ServiceException e) {
-            logger.log(Level.ERROR, e);
-            content.setRequestAttribute(ERROR_MESSAGE_ATTR, e);
-            router.setPage(ERROR_PAGE);
         }finally {
             service.finishService();
         }
