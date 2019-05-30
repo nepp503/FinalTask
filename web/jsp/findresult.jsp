@@ -26,22 +26,22 @@
         </h2>
     </div>
     <section class="section-people">
-        <c:forEach var="volunteer" items="${requestScope.findlist}">
+        <c:forEach var="person" items="${requestScope.findlist}">
             <ul>
                 <li>
                     <div class="person">
-                        <a href="controller?show_person_page&personid=${volunteer.id}">
-                            <h4 class="title"><c:out value="${volunteer.firstName} ${volunteer.lastName}"/></h4>
+                        <a href="controller?command=show_person_page&personid=${person.id}">
+                            <h4 class="title"><c:out value="${person.firstName} ${person.lastName}"/></h4>
                         </a>
 
                         <div class="poster">
                             <a href="#">
-                                <img src="${pageContext.request.contextPath}/${volunteer.photo}"
-                                     alt="${volunteer.firstName} ${volunteer.lastName}"/>
+                                <img src="${pageContext.request.contextPath}/${person.photo}"
+                                     alt="${person.firstName} ${person.lastName}"/>
                             </a>
                         </div>
 
-                        <p class="description"><c:out value="${volunteer.searchArea}"/></p>
+                        <p class="description"><c:out value="${person.searchArea}"/></p>
                     </div>
                 </li>
             </ul>

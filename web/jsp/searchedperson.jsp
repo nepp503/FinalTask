@@ -146,7 +146,6 @@
                     <input type="submit" class="leave-review-btn" value="<fmt:message key="leave.response"/> ">
                 </form>
             </c:if>
-
         </div>
     </section>
 </section>
