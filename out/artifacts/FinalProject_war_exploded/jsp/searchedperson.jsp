@@ -1,13 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--<%@ taglib prefix="ctg" uri="customtags" %>--%>
 <!DOCTYPE html>
 <html>
- <jsp:useBean id="searchedperson" scope="request" class="com.siniak.finaltask.entity.SearchedPerson"/>
+     <c:choose>
+         <c:when test="${not empty requestScope.searchedperson}">
+             <c:set value="${requestScope.searchedperson}" var="searchedperson"/>
+         </c:when>
+         <c:otherwise>
+             <c:set value="${sessionScope.searchedperson}" var="searchedperson"/>
+         </c:otherwise>
+     </c:choose>
 <head>
     <title>${searchedperson.firstName} ${searchedperson.lastName}</title>
     <meta charset="utf-8">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/personPage.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/updateReview.js"></script>
@@ -24,10 +31,14 @@
         <h2>${searchedperson.firstName} ${searchedperson.lastName}
             <c:set var="admin" value="ADMIN"/>
             <c:if test="${user.userType == admin}">
-                <button class="edit-by-admin-btn"><a
-                        href="controller?command=edit_person&personid=${searchedperson.id}"><i
-                        class="fa fa-pencil-square-o"
-                        aria-hidden="true"></i></a></button>
+                <button class="edit-by-admin-btn">
+                    <a href="controller?command=edit_person&personid=${searchedperson.id}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                </button>
+                <button class="delete-person-btn">
+                    <a href="controller?command=delete_person&personid=${searchedperson.id}">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </button>
             </c:if>
         </h2>
     </div>
@@ -56,8 +67,16 @@
 
             <c:set var="addedResponse" value="false"/>
 
-            <c:if test="${not empty requestScope.responses}">
-                <c:set var="helpResponses" value="${requestScope.responses}"/>
+            <c:choose>
+                <c:when test="${not empty requestScope.responses}">
+                    <c:set var="helpResponses" value="${requestScope.responses}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="helpResponses" value="${sessionScope.responses}"/>
+                </c:otherwise>
+            </c:choose>
+
+            <c:if test="${not empty helpResponses}">
                 <p><strong><fmt:message key="responses"/> : </strong></p>
                 <c:forEach var="response" items="${helpResponses}">
                     <c:choose>
@@ -72,18 +91,22 @@
                                                                                         aria-hidden="true"></i></button>
                                     </div>
 
-                                    <form action="controller" method="post" class="delete-review-form">
+                                    <form action="${pageContext.request.contextPath}/controller" method="post"
+                                          class="delete-review-form">
                                         <input type="hidden" name="command" value="delete_help_response"/>
                                         <input type="hidden" name="responseid" value="${response.id}"/>
+                                        <input type="hidden" name="personid" value="${response.searchedPersonId}"/>
                                         <div class="btn">
                                             <button class="delete-btn"><i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </form>
 
-                                    <form action="controller" method="post" id="edit-review-form-${response.id}">
-                                        <input type="hidden" name="responseid" value="${response.id}"/>
+                                    <form action="${pageContext.request.contextPath}/controller" method="post"
+                                          id="edit-review-form-${response.id}">
                                         <input type="hidden" name="command" value="update_help_response"/>
+                                        <input type="hidden" name="responseid" value="${response.id}"/>
+                                        <input type="hidden" name="personid" value="${response.searchedPersonId}"/>
                                         <input type="hidden" name="review"/>
 
                                         <div class="btn">
@@ -111,7 +134,7 @@
             </c:if>
 
             <c:if test="${user.id != 0 and not addedReview}">
-                <form action="controller" method="post">
+                <form action="${pageContext.request.contextPath}/controller" method="post">
                     <input type="hidden" name="command" value="create_help_response"/>
                     <input type="hidden" name="userid" value="${user.id}"/>
                     <input type="hidden" name="personid" value="${searchedperson.id}"/>
@@ -125,7 +148,6 @@
             </c:if>
 
         </div>
-        <a href="${requestScope.previous_page}"><fmt:message key="back"/></a>
     </section>
 </section>
 <c:import url="footer.jsp"/>

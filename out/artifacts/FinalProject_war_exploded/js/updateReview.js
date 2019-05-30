@@ -33,10 +33,4 @@ $(document).ready(function () {
         }
     });
 
-    $(".delete-rating-btn").click(function(e){
-        e.preventDefault();
-        if (confirm("Are you sure you want to delete your rating?")){
-            $("form.delete-rating-form").submit();
-        }
-    });
 });

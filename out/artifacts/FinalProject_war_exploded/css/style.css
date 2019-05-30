@@ -136,7 +136,7 @@ body {
 
 .person a {
     text-decoration: none;
-    color: #39fa53;
+    color: rgba(145, 145, 145, 0.96);
 }
 
 .person a:hover {
@@ -206,7 +206,7 @@ html {
 }
 
 body {
-    margin: 0 0 100px; /* bottom = footer height */
+    margin: 0 0 100px;
     padding: 25px;
 }
 
