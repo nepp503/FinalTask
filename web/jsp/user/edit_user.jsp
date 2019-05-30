@@ -12,7 +12,7 @@
 </head>
 <body class="home">
 <fmt:setLocale value="${sessionScope.locale}"/>
-<c:import url="header.jsp"/>
+<c:import url="../header.jsp"/>
 <div class="edit-page">
     <div class="greeting">
         <h2><fmt:message key="edit.user"/></h2>
@@ -61,6 +61,6 @@
         </div>
     </form>
 </div>
-<c:import url="footer.jsp"/>
+<c:import url="../footer.jsp"/>
 </body>
 </html>

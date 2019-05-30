@@ -14,7 +14,7 @@
 <body class="home">
 <fmt:setLocale value="${sessionScope.locale}"/>
 
-<c:import url="header.jsp"/>
+<c:import url="../header.jsp"/>
 <section class="section main">
     <div class="section-title">
         <h2>${user.login}</h2>
@@ -55,6 +55,6 @@
             </c:if>
     </section>
 </section>
-<c:import url="footer.jsp"/>
+<c:import url="../footer.jsp"/>
 </body>
 </html>

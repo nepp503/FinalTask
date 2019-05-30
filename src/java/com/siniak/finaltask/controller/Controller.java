@@ -14,6 +14,11 @@ import java.io.IOException;
 
 import static com.siniak.finaltask.util.AttributeParameterPathConstant.FORWARD;
 
+/**
+ * Front controller
+ * @author Vitali Siniak
+ */
+
 @WebServlet(name = "Controller", urlPatterns = {"/controller"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5,
